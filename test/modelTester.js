@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
 }
 
 describe(
-  "Basic model test, expect to see mysql queries (no results testing)",
+  "Basic model test, expect to see mysql queries (no results testing) and app listening on PORT",
   function() {
     it("table initialization for all models, listening on PORT", function (done) {
     // Starting the server, syncing our models ------------------------------------/

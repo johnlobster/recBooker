@@ -1,3 +1,4 @@
+// tests that test environment is working
 const expect = require("chai").expect;
 
 describe("canary test", function() {
