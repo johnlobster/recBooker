@@ -1,3 +1,3 @@
 -- populate database after sequelize has created the tables
--- run automatically by server.js
+-- run automatically by server.js (code not written yet)
 
