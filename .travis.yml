@@ -3,9 +3,9 @@ node_js: "8"
 branches:
   only:
   - master
-  - TravisTesting
+  - InitialSetup
 cache:
   directories:
     - node_modules
 before_install:
-  - mysql -e 'CREATE DATABASE testdb;'
+  - mysql -e 'CREATE DATABASE recbooker_test_db;'
