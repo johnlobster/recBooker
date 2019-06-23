@@ -1,6 +1,8 @@
 // tests to see whether models will compile and db access is possible
 // a subset of server.js, with a mocha wrapper
 
+const executeSQLFile = require("./functions/executeSQLFile.js");
+
 const expect = require("chai").expect;
 
 require("dotenv").config();
@@ -26,11 +28,26 @@ if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
 describe(
   "Basic model test, expect to see mysql queries (no results testing) and app listening on PORT",
   function() {
-    it("table initialization for all models, listening on PORT", function (done) {
+    it("table initialization for all models, check listening on PORT", function (done) {
     // Starting the server, syncing our models ------------------------------------/
     db.sequelize.sync(syncOptions)
       .then(function() {
-        app.listen(PORT, function() {
+          // seed database with known values for testing
+          //   return db.sequelize.query("SELECT 1");
+          return executeSQLFile(db,"./db/seed.mysql");
+      })
+      .then( () => {
+        console.log("Finished seeding database");
+        // wrap promise around listen
+        return new Promise ((resolve,reject) => {
+            console.log("Here");
+            app.listen(PORT, ()=> {
+                resolve("Listening");
+            });
+        })
+      })
+      .then( (text) => {
+          console.log(text);
           console.log(
             "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
             PORT,
@@ -39,10 +56,9 @@ describe(
           done(); // done doesn't quit node, sends information to mocha
           // this is just a test program so quit node, this will close the port
           process.exit();
-        });
-      })
+        })
       .catch(err => {
-        console.log("Error in start sequelize");
+        console.log("\nError in start sequelize/app listen setup\n");
         console.log(err);
       });
     })
