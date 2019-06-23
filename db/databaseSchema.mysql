@@ -1,0 +1,6 @@
+-- creates database. Run through mysql command line or mysql workbench
+
+DROP DATABASE IF EXISTS recbooker_db;
+CREATE DATABASE recbooker_db;
+
+-- USE recbooker_db;

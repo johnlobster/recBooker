@@ -1,7 +1,7 @@
 {
-  "name": "node-handlebars-boilerplate",
+  "name": "reqBooker",
   "version": "1.0.0",
-  "description": "Project 2 Starter",
+  "description": "Recreation facility management app",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
