@@ -1,20 +1,25 @@
 "use strict";
+// template generated file that reads all mnodels in models subdirectory
+// and adds them to the db
 
-var fs = require("fs");
-var path = require("path");
-var Sequelize = require("sequelize");
-var basename = path.basename(module.filename);
-var env = process.env.NODE_ENV || "development";
-var config = require(__dirname + "/../config/config.json")[env];
+const fs = require("fs");
+const path = require("path");
+const Sequelize = require("sequelize");
+const basename = path.basename(module.filename);
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
-if (config.use_env_variable) {
+// JAWSDB_URL must be set in heroku environment
+if (process.env.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
+  // development or test environment
+  // hold database locally with local user name and password
   var sequelize = new Sequelize(
     config.database,
-    config.username,
-    config.password,
+    process.env.DEV_MYSQL_USER,
+    process.env.DEV_MYSQL_PASSWORD,
     config
   );
 }

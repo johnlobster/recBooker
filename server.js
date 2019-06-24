@@ -1,11 +1,11 @@
 require("dotenv").config();
-var express = require("express");
+const express = require("express");
 var exphbs = require("express-handlebars");
 
 var db = require("./models");
 
 var app = express();
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080; // note app port, not mysql
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -29,7 +29,7 @@ var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
-if (process.env.NODE_ENV === "test") {
+if (process.env.NODE_ENV === "test" || process.env.DEV_MYSQL_FORCE_DB_RESET) {
   syncOptions.force = true;
 }
 
