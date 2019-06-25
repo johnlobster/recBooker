@@ -14,16 +14,15 @@ function readFilePromise(fileName) {
                 reject(err);
             }
             else{
-                // break data down into lines, remove \r, strip out empty lines (mySQL doesn't accept)
+                // break data down into query lines, remove \r\n, strip out empty lines (mySQL doesn't accept)
                 resolve(data
-                .toString()
-                .split("\n")
-                .map((line) => {
-                    return line.replace(/\r/g, "");
-                })
-                .filter( (line) => { // sql cannot accept a blank query
-                    return line !== "";
-                }));
+                  .toString()                        // convert file buffer to a string
+                  .replace( /--.*\r*\n+/g, "")        // strip out comment lines
+                  .replace( /\r*\n*/g,"")            // remove carriage returns
+                  .split(";")                        // split into array of SQL queries
+                  .filter( (str) => {return str !== ""  })  // get rid of blank lines
+                  .map((str) => { return str + ";" }) // add terminating ; to each query
+                );
             }
         });
     });
@@ -31,13 +30,13 @@ function readFilePromise(fileName) {
 }
 
 // test
-// readFilePromise("./db/seed.mysql")
-//     .then((data) => {
-//         console.log(data);
-//     })
-//     .catch( (err) => {
-//         console.log(err);
-//     });
+readFilePromise("./db/seed.mysql")
+    .then((data) => {
+        console.log(data);
+    })
+    .catch( (err) => {
+        console.log(err);
+    });
 
 // read .sql file and execute array of commands in mysql database. Returns promise
 module.exports = function( dataBase, fileName, run) {
