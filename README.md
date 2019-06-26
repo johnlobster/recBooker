@@ -45,6 +45,7 @@ create a `.env` file (not tracked by git) and add the following using editor
 ```
 DEV_MYSQL_USER="<your user name for mysql server>"
 DEV_MYSQL_PASSWORD="<your password to mysql server>"
+NODE_ENV ="development"
 ```
 
 Initialize mysql server: (only needs to be done once)
@@ -65,7 +66,11 @@ mysql> source db/testDatabaseSchema.mysql;
 mysql> exit
 ```
 
-(coming soon - option to clear database and seed it)
+to clear database and seed it, add
+```
+DEV_MYSQL_FORCE_DB_RESET=0
+```
+to `.env` file
 
 to run application
 `node server`

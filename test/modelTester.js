@@ -18,13 +18,22 @@ const PORT = process.env.PORT || 8080; // note app port, not mysql
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
 var syncOptions = { force: false, logging: false };
-if (process.env.NODE_ENV === "test" || process.env.DEV_MYSQL_FORCE_DB_RESET) {
+var seedDB = false; // don't seed database 
+if (
+  process.env.NODE_ENV === "test" ||
+  (process.env.NODE_ENV === "development" &&
+    process.env.DEV_MYSQL_FORCE_DB_RESET)
+) {
   syncOptions.force = true;
+  seedDB = true;
 }
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
-    syncOptions.logging = console.log;
+  syncOptions.logging = console.log;
 }
 
+// console.log("NODE_ENV = " + process.env.NODE_ENV);
+// console.log("Seed DB " + seedDB);
+// console.log(syncOptions);
 describe(
   "Basic model test, expect to see mysql queries (no results testing) and app listening on PORT",
   function() {
@@ -33,21 +42,17 @@ describe(
     db.sequelize.sync(syncOptions)
       .then(function() {
           // seed database with known values for testing
-          //   return db.sequelize.query("SELECT 1");
-          return executeSQLFile(db,"./db/seed.mysql");
+          return executeSQLFile(db,"./db/seed.mysql", seedDB);
       })
       .then( () => {
-        console.log("Finished seeding database");
         // wrap promise around listen
         return new Promise ((resolve,reject) => {
-            console.log("Here");
             app.listen(PORT, ()=> {
-                resolve("Listening");
+                resolve();
             });
         })
       })
-      .then( (text) => {
-          console.log(text);
+      .then( () => {
           console.log(
             "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
             PORT,
