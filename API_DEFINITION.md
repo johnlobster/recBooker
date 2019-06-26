@@ -25,9 +25,9 @@ returns JSON array of all users {id: name:}
 returns json array of all bookings for :facilityId from :startDate to :endDate 
 {id:, startTime:, endTime:, userName:,facility:}
 
-##### GET `/api/user_bookings/:user/:startDate/:endDate`
+##### GET `/api/user_bookings/:userId/:startDate/:endDate`
 
-returns json array of all bookings for :user on :startDate to :endDate {id:, startTime:, endTime:, userName:, facility:}}
+returns json array of all bookings for :userId on :startDate to :endDate {id:, startTime:, endTime:, userName:, facility:}}
 
 ##### POST `/api/newuser`
 
