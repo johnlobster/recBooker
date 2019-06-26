@@ -47,6 +47,25 @@ request data (json) {facilityId:, UserId, startTime:, endTime:}
 
 return json object {success:true/false}
 
+#### DELETE `/api/booking/:bookingId`
+
+Deletes booking from database
+
+return json object {success:true/false}
+
+#### DELETE `/api/user/userId`
+
+Deletes user from database
+
+return json object {success:true/false}
+
+#### PUT `/api/booking/:bookingId`
+
+Change booking
+
+request data (json) {bookingId:, facilityId:, userId:, startTime:, endTime:}
+
+return json object {success:true/false}
 
 ## HTML routes
 
