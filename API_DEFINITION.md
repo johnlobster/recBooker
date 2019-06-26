@@ -20,9 +20,9 @@ returns JSON array of all facilities { id:, name:}
 
 returns JSON array of all users {id: name:}
 
-##### GET `/api/facility_bookings/:facility/:startDate/:endDate`
+##### GET `/api/facility_bookings/:facilityId/:startDate/:endDate`
 
-returns json array of all bookings for :facility from :startDate to :endDate 
+returns json array of all bookings for :facilityId from :startDate to :endDate 
 {id:, startTime:, endTime:, userName:,facility:}
 
 ##### GET `/api/user_bookings/:user/:startDate/:endDate`

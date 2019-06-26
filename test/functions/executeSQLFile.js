@@ -30,13 +30,13 @@ function readFilePromise(fileName) {
 }
 
 // test
-readFilePromise("./db/seed.mysql")
-    .then((data) => {
-        console.log(data);
-    })
-    .catch( (err) => {
-        console.log(err);
-    });
+// readFilePromise("./db/seed.mysql")
+//     .then((data) => {
+//         console.log(data);
+//     })
+//     .catch( (err) => {
+//         console.log(err);
+//     });
 
 // read .sql file and execute array of commands in mysql database. Returns promise
 module.exports = function( dataBase, fileName, run) {

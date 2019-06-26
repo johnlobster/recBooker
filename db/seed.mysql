@@ -2,11 +2,11 @@
 -- run automatically by server.js
 -- NOTE - have to explicitly populate createdAt, updatedAt columns and foreign keys 
 
-INSERT INTO examples (text, description, createdAt, updatedAt) 
-VALUES ("here","some text", NOW(), NOW()),
-("there", "more text", NOW(),NOW());
+-- INSERT INTO examples (text, description, createdAt, updatedAt) 
+-- VALUES ("here","some text", NOW(), NOW()),
+-- ("there", "more text", NOW(),NOW());
 
-INSERT INTO examples (text, description, createdAt, updatedAt) 
-VALUES ("Line 3","some text", NOW(), NOW()),
-("Line 4", "more text", NOW(),NOW());
+-- INSERT INTO examples (text, description, createdAt, updatedAt) 
+-- VALUES ("Line 3","some text", NOW(), NOW()),
+-- ("Line 4", "more text", NOW(),NOW());
 
