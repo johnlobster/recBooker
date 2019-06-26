@@ -20,9 +20,9 @@ returns JSON array of all facilities { id:, name:}
 
 returns JSON array of all users {id: name:}
 
-##### GET `/api/facility_bookings/:facility/:startDate/:endDate`
+##### GET `/api/facility_bookings/:facilityId/:startDate/:endDate`
 
-returns json array of all bookings for :facility from :startDate to :endDate 
+returns json array of all bookings for :facilityId from :startDate to :endDate 
 {id:, startTime:, endTime:, userName:,facility:}
 
 ##### GET `/api/user_bookings/:user/:startDate/:endDate`
@@ -47,6 +47,25 @@ request data (json) {facilityId:, UserId, startTime:, endTime:}
 
 return json object {success:true/false}
 
+#### DELETE `/api/booking/:bookingId`
+
+Deletes booking from database
+
+return json object {success:true/false}
+
+#### DELETE `/api/user/userId`
+
+Deletes user from database
+
+return json object {success:true/false}
+
+#### PUT `/api/booking/:bookingId`
+
+Change booking
+
+request data (json) {bookingId:, facilityId:, userId:, startTime:, endTime:}
+
+return json object {success:true/false}
 
 ## HTML routes
 

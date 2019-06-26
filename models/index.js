@@ -31,10 +31,14 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach(function(file) {
-    var model = sequelize.import(path.join(__dirname, file));
+    // let model = sequelize.import(path.join(__dirname, file), () => {
+    //   // console.log("Imported " + file);
+    // });
+    let model = sequelize.import(path.join(__dirname, file));
     db[model.name] = model;
   });
 
+// create associations, defined in model files
 Object.keys(db).forEach(function(modelName) {
   if (db[modelName].associate) {
     db[modelName].associate(db);
