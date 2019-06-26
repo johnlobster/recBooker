@@ -1,4 +1,5 @@
-var db = require("../models");
+const db = require("../models");
+const moment = require("moment");
 
 // using facility, user, and booking for our db
 module.exports = function(app) {
@@ -40,7 +41,7 @@ module.exports = function(app) {
     db.bookings
       .findAll({
         where: {
-          facilty: req.params.id,
+          faciltyId: req.params.facility,
           startDate: { $between: [firstDate, secondDate] },
           endDate: { $between: [firstDate, secondDate] }
         }
