@@ -1,4 +1,4 @@
-//var db = require("../models");
+// don't need to import because apiRoutes has already required everything
 
 module.exports = function(app) {
   // Load index page

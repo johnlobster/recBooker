@@ -53,11 +53,15 @@ db.sequelize
     return executeSQLFile(db, "./db/seed.mysql", seedDB);
   })
   .then(() => {
-    console.log("Now start listening");
-    return new Promise(resolve => {
-      app.listen(PORT, () => {
-        resolve();
-      });
+    return new Promise((resolve, reject) => {
+      app
+        .listen(PORT, () => {
+          resolve();
+        })
+        .on("error", err => {
+          // pass on errors if listen fails
+          reject(err);
+        });
     });
   })
   .then(() => {
