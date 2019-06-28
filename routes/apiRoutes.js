@@ -9,14 +9,14 @@ module.exports = function(app) {
 
   // Returns all facilities
   app.get("/api/facilities", function(req, res) {
-    db.facility.findAll({}).then(function(dbFacility) {
+    db.Facility.findAll({}).then(function(dbFacility) {
       res.json(dbFacility);
     });
   });
 
   // Returns all users
   app.get("/api/users", function(req, res) {
-    db.users.findAll({}).then(function(dbUsers) {
+    db.User.findAll({}).then(function(dbUsers) {
       res.json(dbUsers);
     });
   });
@@ -26,7 +26,7 @@ module.exports = function(app) {
     req,
     res
   ) {
-    db.bookings.findAll({}).then(function(dbBookings) {
+    db.Booking.findAll({}).then(function(dbBookings) {
       res.json(dbBookings);
     });
   });
@@ -57,17 +57,15 @@ module.exports = function(app) {
     req,
     res
   ) {
-    db.bookings
-      .findAll({
-        where: {
-          user: req.params.user,
-          startDate: { $between: [firstDate, secondDate] },
-          endDate: { $between: [firstDate, secondDate] }
-        }
-      })
-      .then(function(dbBookDate) {
-        res.json(dbBookDate);
-      });
+    db.Booking.findAll({
+      where: {
+        user: req.params.user,
+        startDate: { $between: [firstDate, secondDate] },
+        endDate: { $between: [firstDate, secondDate] }
+      }
+    }).then(function(dbBookDate) {
+      res.json(dbBookDate);
+    });
   });
 
   // POST route for saving a new user
