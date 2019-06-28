@@ -2,6 +2,7 @@
 // template generated file that reads all mnodels in models subdirectory
 // and adds them to the db
 
+require("dotenv").config(); // add variables in .env file to process.env
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
@@ -11,8 +12,9 @@ const config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
 // JAWSDB_URL must be set in heroku environment
-if (process.env.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+if (process.env.JAWSDB_URL) {
+  // production environment
+  var sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
   // development or test environment
   // hold database locally with local user name and password
