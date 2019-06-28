@@ -1,10 +1,11 @@
 // support function - reads a file of SQL queries and sends them to the database
 // one at a time
 // useful for executing seed file for testing/development
+// returns promise
 
 fs = require("fs");
 
-// reads file and parses into an array of lines - returns promise
+// reads file of SQL commands and parses into an array of lines - returns promise
 function readFilePromise(fileName) {
     return new Promise((resolve, reject) => {
         fs.readFile(fileName, (err, data) => {
@@ -13,14 +14,15 @@ function readFilePromise(fileName) {
                 reject(err);
             }
             else{
-                // break data down into lines, remove \r
-                resolve(data.toString().split("\n")
-                .map((line) => {
-                    return line.replace(/\r/g, "");
-                })
-                .filter( (line) => { // sql cannot accept a blank query
-                    return line !== "";
-                }));
+                // break data down into query lines, remove \r\n, strip out empty lines (mySQL doesn't accept)
+                resolve(data
+                  .toString()                        // convert file buffer to a string
+                  .replace( /--.*\r*\n+/g, "")        // strip out comment lines
+                  .replace( /\r*\n*/g,"")            // remove carriage returns
+                  .split(";")                        // split into array of SQL queries
+                  .filter( (str) => {return str !== ""  })  // get rid of blank lines
+                  .map((str) => { return str + ";" }) // add terminating ; to each query
+                );
             }
         });
     });
@@ -37,23 +39,35 @@ function readFilePromise(fileName) {
 //     });
 
 // read .sql file and execute array of commands in mysql database. Returns promise
-module.exports = function( dataBase, fileName) {
+module.exports = function( dataBase, fileName, run) {
     return new Promise((resolve, reject) => {
-        readFilePromise(fileName)
-        .then( (sqlCommands) => {
-            // reduce method can be used to execute promises in sequence
-            sqlCommands.reduce( (previousPromise, query) => {
-                return previousPromise.then(() => {
-                    console.log("Running query " + query);
-                    return dataBase.sequelize.query(query)
-                });
-            }, Promise.resolve());
+        if (run) {
+            readFilePromise(fileName)
+            .then( (sqlCommands) => {
+                // reduce method can be used to execute promises in sequence
+                sqlCommands
+                .reduce( (previousPromise, query) => {
+                    return previousPromise
+                    .then(() => {
+                        // console.log("QUERY = " + query);
+                        return dataBase.sequelize.query(query);
+                    });
+                    }, Promise.resolve()) // Promise.resolve is the initial value to .reduce
+                .then( () => {
+                    // console.log("All queries completed");
+                        resolve();
+                    });
+            })
+            .catch( (err) => {
+                console.log("Error in executeSQLFile");
+                console.log(err);
+                reject(err);
+            });
+        }
+        else {
+            // not running so resolve with empty options. Still a promise but no asychronous behaviour
+            // console.log("No SQL seed");
             resolve();
-        })
-        .catch( (err) => {
-            console.log("Error in executeSQLFile");
-            console.log(err);
-            reject(err);
-        });
+        }
     });
 }
