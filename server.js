@@ -45,6 +45,8 @@ if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
   syncOptions.logging = console.log;
 }
 
+// console.log("syncOptions " + syncOptions);
+// console.log("NODE_ENV " + process.env.NODE_ENV);
 // Starting the server, syncing models, seed DB if necessary (promise chain)
 db.sequelize
   .sync(syncOptions)

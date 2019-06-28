@@ -8,10 +8,6 @@ const chaiHttp = require('chai-http');
 const expect = chai.expect();
 chai.use(chaiHttp);
 
-console.log(process.env.NODE_ENV);
-
-const server = require('../server'); // starts server
-
 describe("CRUD on bookings table using api routes", () => {
     it("Create new booking", () => {
 
@@ -19,7 +15,7 @@ describe("CRUD on bookings table using api routes", () => {
     it("Read all bookings", (done) => {
         const startDate = moment().subtract(10, "days");
         const endDate = moment().add(10, "days");
-        chai.request(server)
+        chai.request(app)
             .get(`/api/facility_bookings/1/${startDate}/${endDate}`)
             .end((err, res) => {
                 if (err) throw err;
