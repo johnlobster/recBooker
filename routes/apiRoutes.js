@@ -70,9 +70,24 @@ module.exports = function(app) {
 
   // POST route for saving a new user
   app.post("/api/newUser", function(req, res) {
-    db.Post.create(req.body).then(function(dbNewUser) {
-      res.json(dbNewUser);
+    console.log(req.body);
+    db.User.findOne({
+      where: {
+        name: req.body.name
+      }
+    }).then(function(result) {
+      if (result === null) {
+        db.User.create(req.body).then(function(dbNewUser) {
+          console.log("dbNewUser: " + dbNewUser);
+          res.json(dbNewUser);
+          console.log(`Creating User: ${JSON.stringify(dbNewUser)}`);
+        });
+      } else {
+        console.log("that name already exists in the DB");
+        res.json(result);
+      }
     });
+    
   });
 
   // POST route for saving a new user
