@@ -36,17 +36,20 @@ module.exports = function(app) {
     req,
     res
   ) {
-    let firstDate = dateIncrement(req.params.startDate, -1);
-    let secondDate = dateIncrement(req.params.endDate, 1);
-    db.Booking.findAll({
-      where: {
-        faciltyId: req.params.facility,
-        startDate: { $between: [firstDate, secondDate] },
-        endDate: { $between: [firstDate, secondDate] }
-      }
-    }).then(function(dbBookDate) {
-      res.json(dbBookDate);
-    });
+    // these two variables are there in case we need to add or subtrack dates to be inclusive on our date range picking
+    // let firstDate = dateIncrement(req.params.startDate, -1);
+    // let secondDate = dateIncrement(req.params.endDate, 1);
+    db.bookings
+      .findAll({
+        where: {
+          faciltyId: req.params.facility,
+          startDate: { $between: [firstDate, secondDate] },
+          endDate: { $between: [firstDate, secondDate] }
+        }
+      })
+      .then(function(dbBookDate) {
+        res.json(dbBookDate);
+      });
   });
 
   // Returns all bookings between a start and end date for a specific user (renter)
@@ -67,9 +70,24 @@ module.exports = function(app) {
 
   // POST route for saving a new user
   app.post("/api/newUser", function(req, res) {
-    db.Post.create(req.body).then(function(dbNewUser) {
-      res.json(dbNewUser);
+    console.log(req.body);
+    db.User.findOne({
+      where: {
+        name: req.body.name
+      }
+    }).then(function(result) {
+      if (result === null) {
+        db.User.create(req.body).then(function(dbNewUser) {
+          console.log("dbNewUser: " + dbNewUser);
+          res.json(dbNewUser);
+          console.log(`Creating User: ${JSON.stringify(dbNewUser)}`);
+        });
+      } else {
+        console.log("that name already exists in the DB");
+        res.json(result);
+      }
     });
+    
   });
 
   // POST route for saving a new user
@@ -79,4 +97,4 @@ module.exports = function(app) {
     });
   });
 };
-// this is a comment for eslint
+// this is a comment for eslint duh
