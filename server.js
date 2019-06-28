@@ -45,6 +45,8 @@ if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
   syncOptions.logging = console.log;
 }
 
+// console.log("syncOptions " + syncOptions);
+// console.log("NODE_ENV " + process.env.NODE_ENV);
 // Starting the server, syncing models, seed DB if necessary (promise chain)
 db.sequelize
   .sync(syncOptions)
@@ -53,11 +55,15 @@ db.sequelize
     return executeSQLFile(db, "./db/seed.mysql", seedDB);
   })
   .then(() => {
-    console.log("Now start listening");
-    return new Promise(resolve => {
-      app.listen(PORT, () => {
-        resolve();
-      });
+    return new Promise((resolve, reject) => {
+      app
+        .listen(PORT, () => {
+          resolve();
+        })
+        .on("error", err => {
+          // pass on errors if listen fails
+          reject(err);
+        });
     });
   })
   .then(() => {
