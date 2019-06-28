@@ -36,8 +36,9 @@ module.exports = function(app) {
     req,
     res
   ) {
-    let firstDate = dateIncrement(req.params.startDate, -1);
-    let secondDate = dateIncrement(req.params.endDate, 1);
+    // these two variables are there in case we need to add or subtrack dates to be inclusive on our date range picking
+    // let firstDate = dateIncrement(req.params.startDate, -1);
+    // let secondDate = dateIncrement(req.params.endDate, 1);
     db.bookings
       .findAll({
         where: {
