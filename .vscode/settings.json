@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    ".DS_Store": "explorerExcludedFiles",
+    "node_modules": "explorerExcludedFiles",
+    "npm-debug.log": "explorerExcludedFiles",
+    ".env": "explorerExcludedFiles",
+    "desktop.ini": "explorerExcludedFiles"
+  }
+}

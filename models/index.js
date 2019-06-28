@@ -1,7 +1,12 @@
 "use strict";
 // template generated file that reads all mnodels in models subdirectory
 // and adds them to the db
-
+r="Enter your username">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                  </div>
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
@@ -9,7 +14,7 @@ const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
 var db = {};
-
+</input>
 // JAWSDB_URL must be set in heroku environment
 if (process.env.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);

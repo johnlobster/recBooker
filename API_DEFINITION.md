@@ -5,7 +5,7 @@ App for making bookings of city recreational facilities, administrating faciliti
 #### Developers
 
 * Michael Sender
-* Filmon
+* Filmon Habtu
 * Rob Ross
 * John Webster
 
