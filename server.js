@@ -1,4 +1,5 @@
 require("dotenv").config(); // add variables in .env file to process.env
+const chalk = require("chalk");
 const executeSQLFile = require("./test/functions/executeSQLFile.js");
 
 const express = require("express");
@@ -7,6 +8,7 @@ var exphbs = require("express-handlebars");
 var db = require("./models"); // reads index.js which reads all models in models directory
 
 var app = express();
+
 const PORT = process.env.PORT || 8080; // note app port, not mysql
 
 // Middleware
@@ -41,12 +43,18 @@ if (
   syncOptions.force = true;
   seedDB = true;
 }
+yellowLog = function(msg) {
+  console.log(chalk.dim.yellowBright(msg));
+};
+
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
-  syncOptions.logging = console.log;
+  syncOptions.logging = yellowLog;
 }
 
-// console.log("syncOptions " + syncOptions);
+// console.log("Running server.js\nsyncOptions");
+// console.log(syncOptions);
 // console.log("NODE_ENV " + process.env.NODE_ENV);
+// console.log("seedDB " + seedDB);
 // Starting the server, syncing models, seed DB if necessary (promise chain)
 db.sequelize
   .sync(syncOptions)
@@ -55,12 +63,13 @@ db.sequelize
     return executeSQLFile(db, "./db/seed.mysql", seedDB);
   })
   .then(() => {
-    return new Promise((resolve, reject) => {
-      app
+    return new Promise((resolve) => {
+      // assign to variable server so that can be closed later
+      server = app
         .listen(PORT, () => {
           resolve();
         })
-        .on("error", err => {
+        .on("error", (err) => {
           // pass on errors if listen fails
           reject(err);
         });
@@ -68,12 +77,12 @@ db.sequelize
   })
   .then(() => {
     console.log(
-      "==> Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      "\nListening on port %s. Visit http://localhost:%s/ in your browser.\n",
       PORT,
       PORT
     );
   })
-  .catch(err => {
+  .catch((err) => {
     console.log("\nError in start sequelize/app listen setup\n");
     console.log(err);
   });
