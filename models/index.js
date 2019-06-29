@@ -8,7 +8,7 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.json")[env];
+const config = require(__dirname + "./../config/config.js")[env];
 var db = {};
 
 // JAWSDB_URL must be set in heroku environment
@@ -20,8 +20,8 @@ if (process.env.JAWSDB_URL) {
   // hold database locally with local user name and password
   var sequelize = new Sequelize(
     config.database,
-    process.env.DEV_MYSQL_USER,
-    process.env.DEV_MYSQL_PASSWORD,
+    config.username,
+    config.password,
     config
   );
 }
