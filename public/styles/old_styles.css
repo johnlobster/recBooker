@@ -1,7 +1,7 @@
-
-        @charset "UTF-8";
-
-        .sg-color {
+.list-group-item {
+  line-height: 2.5;
+}
+       .sg-color {
             color: #a3bc00
         }
 
@@ -425,7 +425,7 @@
         }
 
         [_nghost-c8] .container-fluid.full[_ngcontent-c8] {
-            background: url(/ng-assets/app_background.jpg) left center/cover no-repeat;
+            background: url(/ng-...pro2/app_background.jpg) left center/cover no-repeat;
             -o-background-size: cover;
             height: 100%;
             padding-top: 20px

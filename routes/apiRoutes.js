@@ -1,5 +1,7 @@
 const db = require("../models");
 const moment = require("moment");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op; // allows sequelize operations to be used in queries
 
 // using facility, user, and booking for our db
 module.exports = function(app) {
@@ -22,10 +24,7 @@ module.exports = function(app) {
   });
 
   // Returns all bookings
-  app.get("/api/facility_bookings/:facility/:startDate/:endDate", function(
-    req,
-    res
-  ) {
+  app.get("/api/bookings", function(req, res) {
     db.Booking.findAll({}).then(function(dbBookings) {
       res.json(dbBookings);
     });
@@ -39,33 +38,39 @@ module.exports = function(app) {
     // these two variables are there in case we need to add or subtrack dates to be inclusive on our date range picking
     // let firstDate = dateIncrement(req.params.startDate, -1);
     // let secondDate = dateIncrement(req.params.endDate, 1);
-    db.bookings
-      .findAll({
-        where: {
-          faciltyId: req.params.facility,
-          startDate: { $between: [firstDate, secondDate] },
-          endDate: { $between: [firstDate, secondDate] }
-        }
-      })
+    let firstDate = moment.utc(req.params.startDate).format();
+    let secondDate = moment.utc(req.params.endDate).format();
+
+    db.Booking.findAll({
+      where: {
+        facilityId: req.params.facility,
+        startTime: { [Op.between]: [firstDate, secondDate] },
+        endTime: { [Op.between]: [firstDate, secondDate] }
+      }
+    })
       .then(function(dbBookDate) {
         res.json(dbBookDate);
+      })
+      .catch((err) => {
+        throw err;
       });
   });
 
   // Returns all bookings between a start and end date for a specific user (renter)
-  app.get("/api/facility_bookings/:user/:startDate/:endDate", function(
-    req,
-    res
-  ) {
+  app.get("/api/user_bookings/:user/:startDate/:endDate", function(req, res) {
     db.Booking.findAll({
       where: {
         user: req.params.user,
-        startDate: { $between: [firstDate, secondDate] },
-        endDate: { $between: [firstDate, secondDate] }
+        startTime: { $between: [firstDate, secondDate] },
+        endTime: { $between: [firstDate, secondDate] }
       }
-    }).then(function(dbBookDate) {
-      res.json(dbBookDate);
-    });
+    })
+      .then(function(dbBookDate) {
+        res.json(dbBookDate);
+      })
+      .catch((err) => {
+        throw err;
+      });
   });
 
   // POST route for saving a new user
@@ -87,7 +92,6 @@ module.exports = function(app) {
         res.json(result);
       }
     });
-    
   });
 
   // POST route for saving a new user
