@@ -47,7 +47,12 @@ module.exports = function(app) {
         startTime: { [Op.between]: [firstDate, secondDate] },
         endTime: { [Op.between]: [firstDate, secondDate] }
       },
-      include: [db.User],
+      include: [
+        {
+          model: db.User,
+          attributes: ["name", "id"]
+        }
+      ],
       order: [["startTime", "ASC"]]
     })
       .then(function(dbBookDate) {
