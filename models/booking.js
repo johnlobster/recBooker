@@ -4,6 +4,20 @@ module.exports = function(sequelize, DataTypes) {
     endTime: DataTypes.DATE
   });
 
+  Booking.associate = function(models) {
+    models.Booking.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+    models.Booking.belongsTo(models.Facility, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
   return Booking;
 };
 
