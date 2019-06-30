@@ -11,7 +11,6 @@ module.exports = function(app) {
   });
 
   app.get("/booking", function(req, res) {
-    // using temporary data for now
     // page makes an api request to populate the table
     // pass list of facilities so user can choose
     db.Facility.findAll({
@@ -21,8 +20,26 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/newbooking", function(req, res) {
+    // page makes an api request to populate the table
+    // pass list of facilities so user can choose
+    db.Facility.findAll({
+      attributes: ["name", "id"]
+    }).then(function(facilityNames) {
+      db.User.findAll({
+        attributes: ["name", "id"]
+      }).then(function(userNames) {
+        res.render("newBooking", {
+          facilityNames: facilityNames,
+          userNames: userNames
+        });
+      });
+    });
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
+    console.log("Oh no 404 time again");
     res.status("404").render("404", { badUrl: req.url });
   });
 };
