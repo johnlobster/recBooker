@@ -39,7 +39,7 @@ module.exports = function(app) {
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
-    console.log("Oh no 404 time again");
+    // console.log("Oh no 404 time again");
     res.status("404").render("404", { badUrl: req.url });
   });
 };
