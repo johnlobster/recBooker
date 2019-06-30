@@ -10,7 +10,6 @@ module.exports = function(app) {
     res.render("login");
   });
 
-  // populate facilities reserved table
   app.get("/booking", function(req, res) {
     // using temporary data for now
     // page makes an api request to populate the table
