@@ -25,7 +25,7 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-// Routes
+// Routes (order is important as last html route returns 404)
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 

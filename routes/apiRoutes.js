@@ -46,7 +46,8 @@ module.exports = function(app) {
         facilityId: req.params.facility,
         startTime: { [Op.between]: [firstDate, secondDate] },
         endTime: { [Op.between]: [firstDate, secondDate] }
-      }
+      },
+      include: [db.User]
     })
       .then(function(dbBookDate) {
         res.json(dbBookDate);
