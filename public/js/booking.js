@@ -24,38 +24,42 @@ $(document).ready(function() {
     // Used for testing
     // startDate = moment.utc().subtract(10, "days").format();
     // endDate = moment.utc().add(10, "days").format();
-    if (moment.utc(endDate).isBefore(startDate)) {
-      console.log("End date is before start date");
+    if (facilityId === 0) {
+      console.log("Need to choose facility");
     } else {
-      // GET data from server
-      $.ajax({
-        url: `/api/facility_bookings/${facilityId}/${startDate}/${endDate}`,
-        method: "GET"
-      }).then(function(body, textStatus, xhdr) {
-        if (textStatus === "success") {
-          if (body.length !== 0) {
-            // populate table
-            let tRow,
-              sDate,
-              eDate,
-              usr = "";
-            for (let i = 0; i < body.length; i++) {
-              tRow = $("<tr>");
-              sDate = $("<td>").text(body[i].startTime);
-              eDate = $("<td>").text(body[i].endTime);
-              usr = $("<td>").text(body[i].User.name);
-              tRow.append(sDate, eDate, usr);
-              $("#tableBody").append(tRow);
+      if (moment.utc(endDate).isBefore(startDate)) {
+        console.log("End date is before start date");
+      } else {
+        // GET data from server
+        $.ajax({
+          url: `/api/facility_bookings/${facilityId}/${startDate}/${endDate}`,
+          method: "GET"
+        }).then(function(body, textStatus, xhdr) {
+          if (textStatus === "success") {
+            if (body.length !== 0) {
+              // populate table
+              let tRow,
+                sDate,
+                eDate,
+                usr = "";
+              for (let i = 0; i < body.length; i++) {
+                tRow = $("<tr>");
+                sDate = $("<td>").text(body[i].startTime);
+                eDate = $("<td>").text(body[i].endTime);
+                usr = $("<td>").text(body[i].User.name);
+                tRow.append(sDate, eDate, usr);
+                $("#tableBody").append(tRow);
+              }
+            } else {
+              console.log("No results returned (no facilities booked)");
             }
           } else {
-            console.log("No results returned (no facilities booked)");
+            console.log(
+              "Error returned from server http status " + String(xhdr.status)
+            );
           }
-        } else {
-          console.log(
-            "Error returned from server http status " + String(xhdr.status)
-          );
-        }
-      });
+        });
+      }
     }
   });
 });
