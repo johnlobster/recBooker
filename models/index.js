@@ -36,9 +36,6 @@ if (process.env.JAWSDB_URL) {
     config
   );
 }
-console.log("config");
-console.log(config);
-console.log("NODE_ENV= " + process.env.NODE_ENV);
 
 fs.readdirSync(__dirname)
   .filter(function(file) {
