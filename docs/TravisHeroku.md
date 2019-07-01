@@ -76,8 +76,6 @@ branches:
 
 ## Heroku deployment
 
-### mysql setup
-
 ### deploying branches as well as master
 
 See <https://devcenter.heroku.com/articles/multiple-environments>
@@ -90,11 +88,19 @@ If you have more than one heroku remote then you have to specify which one you w
 ```
 git config heroku.remote staging
 ```
-You will want to change that back to master when you ar eready to deploy to master.
+You will want to change that back to master when you are ready to deploy to master.
 When your branch is ready to deploy, push it to github as usual, then you can push to heroku
 ```
 git push staging <branch name>:master
 ```
 Heroku will then work as usual. ( `<branch name>` means the name of the branch you are deploying)
+
+### mysql setup
+
+You have to set up the mysql database (JAWS) in heroku before your application will access the database
+Instructions are in the class repo
+`UCDVSAC201903FSF2/14-handlebars/03-Supplemental/MySQLHerokuDeploymentProcess.pdf`
+ 
+
 
 
