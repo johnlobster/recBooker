@@ -5,6 +5,7 @@ services:
 branches:
   only:
   - master
+  - travis
 cache:
   directories:
     - node_modules
