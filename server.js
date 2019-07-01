@@ -32,8 +32,8 @@ require("./routes/htmlRoutes")(app);
 // setup sequelize .sync options
 // .force will drop all tables. use for testing and, if in development and DEV_MYSQL_FORCE_DB_RESET is set
 // .logging will log SQL requests to the console. Use in test and development
-var syncOptions = { force: false, logging: false };
-var seedDB = false; // don't seed database by default
+var syncOptions = { force: false, logging: true };
+var seedDB = true; // don't seed database by default
 
 if (
   process.env.NODE_ENV === "test" ||
