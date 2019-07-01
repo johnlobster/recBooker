@@ -82,6 +82,7 @@ module.exports = function(app) {
 
   // POST route for saving a new user
   app.post("/api/newUser", function(req, res) {
+    console.log("New user");
     console.log(req.body);
     db.User.findOne({
       where: {
@@ -91,6 +92,10 @@ module.exports = function(app) {
       if (result === null) {
         db.User.create(req.body).then(function(dbNewUser) {
           console.log("dbNewUser: " + dbNewUser);
+          if (app.locals.USE_SESSION_COOKIES) {
+            req.session.userName = req.body.name;
+            req.session.userId = dbNewUser.id;
+          }
           res.json(dbNewUser);
           console.log(`Creating User: ${JSON.stringify(dbNewUser)}`);
         });
@@ -101,11 +106,17 @@ module.exports = function(app) {
     });
   });
 
-  // POST route for saving a new user
+  // POST route for saving a new facility
   app.post("/api/newFacility", function(req, res) {
     db.Post.create(req.body).then(function(dbNewFacility) {
       res.json(dbNewFacility);
     });
+  });
+
+  // POST route to logout - deletes session
+  app.post("/api/logout", (req, res) => {
+    req.session = null;
+    res.json({ result: "Logout successful" });
   });
 };
 // this is a comment for eslint duh
