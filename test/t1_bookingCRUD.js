@@ -29,21 +29,22 @@ describe("t1_bookingCRUD: restart server\n", () => {
 });
 describe("CRUD on bookings table using api routes", () => {
     it("Create new booking" + notWritten, (done) => {
-        chai.request(app)
-            .post(`/api/newBooking`)
-            .type('form')
-            .send({
-                '_method': 'put',
-                'password': '123',
-                'confirmPassword': '123'})
-            .end((err, res) => {
-                if (err) throw err;
-                // fs.writeFileSync("temp3", JSON.stringify(res));
-                const body = JSON.parse(res.text);
-                expect(res.status).to.equal(200, "http response code");
-                expect(body.length).to.equal(1);
-                done();
-            });
+        done();
+        // chai.request(app)
+        //     .post(`/api/newBooking`)
+        //     .type('form')
+        //     .send({
+        //         '_method': 'put',
+        //         'password': '123',
+        //         'confirmPassword': '123'})
+        //     .end((err, res) => {
+        //         if (err) throw err;
+        //         // fs.writeFileSync("temp3", JSON.stringify(res));
+        //         const body = JSON.parse(res.text);
+        //         expect(res.status).to.equal(200, "http response code");
+        //         expect(body.length).to.equal(1);
+        //         done();
+        //     });
     });
     it("Read all facility bookings facilityId=1", (done) => {
         const startDate = moment.utc().subtract(10, "days").format();

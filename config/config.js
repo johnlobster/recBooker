@@ -6,6 +6,13 @@ module.exports = {
     host: "localhost",
     dialect: "mysql"
   },
+  travis: {
+    username: "recBookerUser",
+    password: "12345678",
+    database: "recbooker_db",
+    host: "localhost",
+    dialect: "mysql"  
+  },
   test: {
     username: process.env.DEV_MYSQL_USER,
     password: process.env.DEV_MYSQL_PASSWORD,
