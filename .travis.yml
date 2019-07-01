@@ -8,9 +8,8 @@ branches:
   - travis
 cache:
   directories:
-script: 
-  - npm run mocha -u bdd --reporter spec --exit
+    - node_modules
 env: 
-  - NODE_ENV=travis
+  - RUN_TRAVIS_CI=0
 before_install:
   - mysql -u root --password="" < db/travis.sql 
