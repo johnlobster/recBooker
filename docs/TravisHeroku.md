@@ -97,10 +97,21 @@ Heroku will then work as usual. ( `<branch name>` means the name of the branch y
 
 ### mysql setup
 
-You have to set up the mysql database (JAWS) in heroku before your application will access the database
+You have to set up the mysql database (JAWS) in heroku before your application will access the database.
 Instructions are in the class repo
 `UCDVSAC201903FSF2/14-handlebars/03-Supplemental/MySQLHerokuDeploymentProcess.pdf`
- 
+
+However, you don't need to set up the tables as sequelize will do that for you
+I did have to `use` the database before sequelize would create the tables
+
+For example, in mysqlWorkbench
+```
+use g2lb1lxliflknnmf;
+```
+
+Remember that this is a one time setup and the database does not need to be recreated when you push a new version to heroku
+
+
 
 
 
