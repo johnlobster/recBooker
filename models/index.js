@@ -8,6 +8,8 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || "development";
+console.log("NODE_ENV= " + process.env.NODE_ENV);
+
 const config = require(__dirname + "./../config/config.js")[env];
 // travis config is in config.js so now have sql set up right. It's ok for password etc. to
 // be in config file because travis doesn't create anything permanent
