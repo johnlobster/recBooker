@@ -9,6 +9,13 @@ const Sequelize = require("sequelize");
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "./../config/config.js")[env];
+// travis config is in config.js so now have sql set up right. It's ok for password etc. to
+// be in config file because travis doesn't create anything permanent
+// travis: now have to set NODE_ENV to test for the test suite to work
+if (process.env.NODE_ENV === "travis") {
+  process.env.NODE_ENV = "test";
+}
+
 var db = {};
 
 // JAWSDB_URL must be set in heroku environment

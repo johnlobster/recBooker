@@ -1,11 +1,15 @@
 language: node_js
 node_js: "10"
+services:
+  - mysql
 branches:
   only:
   - master
-  - InitialSetup
+  - travis
 cache:
   directories:
     - node_modules
+env: 
+  - NODE_ENV=travis
 before_install:
-  - mysql -e 'CREATE DATABASE recbooker_test_db;'
+  - mysql -u root --password="" < db/travis.sql 
