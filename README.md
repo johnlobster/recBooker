@@ -77,7 +77,7 @@ to run application
 or
 `npm run start`
 
-### Continous integration and linting
+### Continuous integration and linting
 
 ##### eslint
 
