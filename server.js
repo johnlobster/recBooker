@@ -31,10 +31,13 @@ if (
   app.locals.USE_SESSION_COOKIES = true; // variable used in routes
   app.set("trust proxy", 1); // trust first proxy
   // enable cookie-parser
+  // secret needs to come from an environment variable
   var secret = "12345";
   app.use(cookieParser(secret));
+
+  // make cookie expire after 1 hour
   const expiryDate = moment()
-    .add(20, "minutes")
+    .add(1, "hour")
     .toDate();
   console.log("Cookie expires at " + expiryDate + "\n");
 
@@ -44,7 +47,7 @@ if (
     cookie: {
       secureProxy: true,
       httpOnly: true,
-      expires: expiryDate
+      expiryDate: expiryDate
     }
   });
   // install as middleware

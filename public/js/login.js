@@ -24,6 +24,10 @@ $(document).ready(function() {
         if (textStatus === "success") {
           if (body.length !== 0) {
             console.log("Posted successfully");
+            // save user id and name
+            // user id is returned by the server
+            sessionStorage.setItem("userId", body[0].id);
+            sessionStorage.setItem("userName", userName);
           } else {
             console.log("No results returned (no facility booked)");
           }

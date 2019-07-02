@@ -93,6 +93,8 @@ module.exports = function(app) {
         db.User.create(req.body).then(function(dbNewUser) {
           console.log("dbNewUser: " + dbNewUser);
           if (app.locals.USE_SESSION_COOKIES) {
+            // will create a new session even if there was one previously
+            // (someone else logged in from that browser for instance)
             req.session.userName = req.body.name;
             req.session.userId = dbNewUser.id;
           }

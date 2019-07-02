@@ -25,10 +25,19 @@ recBooker is a app and website that helps eliminate the common problem associate
 ### Technologies:
 * Javascript
 * Express
-* Passport Security (New Technology)<br />
 * Sequelize
 * Handlebar
 * Bootstrap
+
+### New technology - sessions
+
+This uses
+* `cookie-parser`
+* `cookie-session`
+
+A detailed explanation can be found at [Sessions](./docs/Session.md)
+
+### Heroku deployment
 
 
 ### Git hub repository
