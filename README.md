@@ -30,6 +30,16 @@ recBooker is a app and website that helps eliminate the common problem associate
 * Bootstrap
 * cookie-session (new technology, allows login sessions to be created)
 
+### New technology - sessions
+
+This uses
+* `cookie-parser`
+* `cookie-session`
+
+A detailed explanation can be found at [Sessions](./docs/Session.md)
+
+### Heroku deployment
+
 
 ### Git hub repository
 

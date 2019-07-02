@@ -16,7 +16,7 @@ module.exports = function(app) {
     db.Facility.findAll({
       attributes: ["name", "id"]
     }).then(function(facilityNames) {
-      res.render("booking", { userName: "Fred", facilityNames });
+      res.render("booking", { facilityNames });
     });
   });
 

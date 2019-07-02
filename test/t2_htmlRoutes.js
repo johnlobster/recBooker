@@ -27,7 +27,7 @@ describe("t2_htmlRoutes: Reset server", () => {
 });
 
 describe("Test html routes", function() {
-    it("render index template from root", function(done) {
+    it("render / or /index template - home page", function(done) {
         chai.request(app)
             .get("/")
             .end((err, res) => {
@@ -37,6 +37,51 @@ describe("Test html routes", function() {
                 if( htmlCheck.fail) {
                     console.log(htmlCheck.msg);
                     expect(1).to.equal(0, "forces test failure due to html issue above"); 
+                }
+                done();
+            });
+
+    });
+    it("render booking template", function(done) {
+        chai.request(app)
+            .get("/booking")
+            .end((err, res) => {
+                if (err) throw err;
+                expect(res.status).to.equal(200, "http response code");
+                let htmlCheck = htmlTests(res.text);
+                if (htmlCheck.fail) {
+                    console.log(htmlCheck.msg);
+                    expect(1).to.equal(0, "forces test failure due to html issue above");
+                }
+                done();
+            });
+
+    });
+    it("render /booking template", function (done) {
+        chai.request(app)
+            .get("/booking")
+            .end((err, res) => {
+                if (err) throw err;
+                expect(res.status).to.equal(200, "http response code");
+                let htmlCheck = htmlTests(res.text);
+                if (htmlCheck.fail) {
+                    console.log(htmlCheck.msg);
+                    expect(1).to.equal(0, "forces test failure due to html issue above");
+                }
+                done();
+            });
+
+    });
+    it("render /newbooking template", function (done) {
+        chai.request(app)
+            .get("/newbooking")
+            .end((err, res) => {
+                if (err) throw err;
+                expect(res.status).to.equal(200, "http response code");
+                let htmlCheck = htmlTests(res.text);
+                if (htmlCheck.fail) {
+                    console.log(htmlCheck.msg);
+                    expect(1).to.equal(0, "forces test failure due to html issue above");
                 }
                 done();
             });

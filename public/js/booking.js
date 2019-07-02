@@ -37,6 +37,8 @@ $(document).ready(function() {
         }).then(function(body, textStatus, xhdr) {
           if (textStatus === "success") {
             if (body.length !== 0) {
+              // clear table
+              $("#tableBody").empty();
               // populate table
               let tRow,
                 sDate,

@@ -15,10 +15,10 @@ VALUES
 ("Soccer field #1", NOW(), NOW()),
 ("Baseball field #1", NOW(), NOW());
 
-INSERT INTO Users (name, createdAt, updatedAt)
+INSERT INTO users (name, password, createdAt, updatedAt)
 VALUES 
-("Mickey mouse", NOW(), NOW()),
-("Minnie mouse", NOW(), NOW());
+("Mickey mouse", "abc", NOW(), NOW()),
+("Minnie mouse", "def", NOW(), NOW());
 
 INSERT INTO Bookings (startTime, endTime, UserId, FacilityId, createdAt, updatedAt)
 VALUES 
