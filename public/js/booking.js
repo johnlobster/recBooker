@@ -44,8 +44,12 @@ $(document).ready(function() {
                 usr = "";
               for (let i = 0; i < body.length; i++) {
                 tRow = $("<tr>");
-                sDate = $("<td>").text(body[i].startTime);
-                eDate = $("<td>").text(body[i].endTime);
+                sDate = $("<td>").text(
+                  moment(body[i].startTime).format("MMM Do HH:mm")
+                );
+                eDate = $("<td>").text(
+                  moment(body[i].endTime).format("MMM Do HH:mm")
+                );
                 usr = $("<td>").text(body[i].User.name);
                 tRow.append(sDate, eDate, usr);
                 $("#tableBody").append(tRow);
