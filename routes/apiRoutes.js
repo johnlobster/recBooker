@@ -118,21 +118,26 @@ module.exports = function(app) {
 
   // POST route to logout - deletes session
   app.post("/api/logout", (req, res) => {
-    if (req.session) {
-      // user id is sent in body, don't log out unless matches user id in session
-      if (parseInt(req.session.userId) === parseInt(req.body.userId)) {
-        req.session = null;
-        res.json({ result: "Logout successful" });
-        console.log("Logged out successfully");
+    if (app.locals.USE_SESSION_COOKIES) {
+      if (req.session) {
+        // user id is sent in body, don't log out unless matches user id in session
+        if (parseInt(req.session.userId) === parseInt(req.body.userId)) {
+          req.session = null;
+          res.json({ result: "Logout successful" });
+          console.log("Logged out successfully");
+        } else {
+          console.log(
+            "Logout unsuccessful (user id did not match session user id)"
+          );
+          res.json();
+        }
       } else {
-        console.log(
-          "Logout unsuccessful (user id did not match session user id)"
-        );
+        console.log("Logout unsuccessful (no session");
         res.json();
       }
     } else {
-      console.log("Logout unsuccessful (no session");
-      res.json();
+      res.json({ result: "Logout successful" });
+      console.log("Logged out successfully");
     }
   });
 };
