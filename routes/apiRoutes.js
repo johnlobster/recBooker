@@ -98,7 +98,8 @@ module.exports = function(app) {
             req.session.userName = req.body.name;
             req.session.userId = dbNewUser.id;
           }
-          res.json(dbNewUser);
+          // don't want to send complete record as that includes password
+          res.json({ id: dbNewUser.id, name: dbNewUser.name });
           console.log(`Creating User: ${JSON.stringify(dbNewUser)}`);
         });
       } else {
@@ -117,8 +118,22 @@ module.exports = function(app) {
 
   // POST route to logout - deletes session
   app.post("/api/logout", (req, res) => {
-    req.session = null;
-    res.json({ result: "Logout successful" });
+    if (req.session) {
+      // user id is sent in body, don't log out unless matches user id in session
+      if (parseInt(req.session.userId) === parseInt(req.body.userId)) {
+        req.session = null;
+        res.json({ result: "Logout successful" });
+        console.log("Logged out successfully");
+      } else {
+        console.log(
+          "Logout unsuccessful (user id did not match session user id)"
+        );
+        res.json();
+      }
+    } else {
+      console.log("Logout unsuccessful (no session");
+      res.json();
+    }
   });
 };
 // this is a comment for eslint duh

@@ -40,6 +40,11 @@ If the client makes a request that requires a session (i.e. logged in user) then
 ### Security
 
 Session cookies could be used by hackers to emulate a user without logging in and access private data. `cookie-session` therefore bundles up the session information and signs it with a "secret" key, which is further encrypted when sent over https. When `cookie-session` reads a cookie sent by the client it is able to decrypt and check that this session cookie originated from that server.
+An example of session cookie
+```
+recBookerSession: 'eyJ1c2VyTmFtZSI6Im1lIiwidXNlcklkIjozfQ==',
+  'recBookerSession.sig': '8v5s4q7u-ZGFN3p-TGKoGYEY-i8' }
+```
 
 ### Client side
 
