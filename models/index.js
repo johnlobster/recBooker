@@ -7,8 +7,19 @@ const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(module.filename);
-const env = process.env.NODE_ENV || "development";
+var env = process.env.NODE_ENV || "development";
+const travisEnv = env;
+// modify env to "travis" so that it picks up the travis setup from config.js
+if (process.env.RUN_TRAVIS_CI) {
+  env = "travis";
+}
 const config = require(__dirname + "./../config/config.js")[env];
+if (process.env.RUN_TRAVIS_CI) {
+  env = travisEnv;
+}
+// travis config is in config.js so now have sql set up right. It's ok for password etc. to
+// be in config file because travis doesn't create anything permanent
+
 var db = {};
 
 // JAWSDB_URL must be set in heroku environment

@@ -10,7 +10,7 @@
 -- VALUES ("Line 3","some text", NOW(), NOW()),
 -- ("Line 4", "more text", NOW(),NOW());
 
-INSERT INTO facilities (name, createdAt, updatedAt)
+INSERT INTO Facilities (name, createdAt, updatedAt)
 VALUES 
 ("Soccer field #1", NOW(), NOW()),
 ("Baseball field #1", NOW(), NOW());
@@ -20,7 +20,7 @@ VALUES
 ("Mickey mouse", "abc", NOW(), NOW()),
 ("Minnie mouse", "def", NOW(), NOW());
 
-INSERT INTO bookings (startTime, endTime, UserId, FacilityId, createdAt, updatedAt)
+INSERT INTO Bookings (startTime, endTime, UserId, FacilityId, createdAt, updatedAt)
 VALUES 
 ("2019-06-29 09:00:0", "2019-07-01 10:00:0", 1, 1, NOW(), NOW()),
 ("2019-07-02 09:00:0", "2019-07-02 09:00:0", 1, 2, NOW(), NOW()),
