@@ -109,7 +109,7 @@ For example, in mysqlWorkbench
 use g2lb1lxliflknnmf;
 ```
 
-Remember that this is a one time setup and the database does not need to be recreated when you push a new version to heroku
+Remember that this is a one time setup and the database does not need to be recreated when you push a new version to heroku.
 
 
 
