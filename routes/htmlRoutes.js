@@ -3,7 +3,11 @@ const db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    res.render("index");
+    db.Facility.findAll({
+      attributes: ["name", "id"]
+    }).then(function(facilityNames) {
+      res.render("index", { facilityNames: facilityNames });
+    });
   });
 
   app.get("/login", function(req, res) {
@@ -21,6 +25,16 @@ module.exports = function(app) {
       attributes: ["name", "id"]
     }).then(function(facilityNames) {
       res.render("booking", { facilityNames });
+    });
+  });
+
+  app.get("/userBooking", function(req, res) {
+    // page makes an api request to populate the table
+    // pass list of facilities so user can choose
+    db.Facility.findAll({
+      attributes: ["name", "id"]
+    }).then(function(facilityNames) {
+      res.render("userBooking", { facilityNames });
     });
   });
 

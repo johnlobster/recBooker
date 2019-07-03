@@ -59,7 +59,7 @@ $large-screen: 1200px !default;
 
 }
 
-#mainLogin {
+#mainLogin, #mainIndex {
     background: url("../images/twin-pinesprojects_login_page_background.jpg") no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -87,4 +87,13 @@ label {
     padding-left: 2em;
     margin-bottom: 0;
 
+}
+
+/* navigation buttons - handlebars partial used on every page */
+.navButton {
+    background-color: rgba(255, 166, 0, 0.685); /* orange partially transparent */
+    color:darkblue;
+    width: 80%;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
 }

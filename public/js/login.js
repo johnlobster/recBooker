@@ -22,7 +22,7 @@ $(document).ready(function() {
         console.log(typeof testStatus);
         console.log(textStatus);
         if (textStatus === "success") {
-          if (!body.length) {
+          if (!body) {
             // no body return, so failed login
             console.log("failed to log in");
           } else {
