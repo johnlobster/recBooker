@@ -164,12 +164,10 @@ module.exports = function(app) {
       }
     }).then(function(result) {
       if (result === null) {
-        console.log(`Login Name: ${JSON.stringify(result)}`);
+        console.log(`Login failed for user ${req.body.name}`);
         res.json(result);
       } else {
-        console.log(
-          `Login Name: ${JSON.stringify(result)} already exists in the DB`
-        );
+        console.log(`Logged in user ${req.body.name}`);
         res.json(result);
       }
     });

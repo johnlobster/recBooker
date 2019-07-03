@@ -6,13 +6,13 @@ $(document).ready(function() {
     let userPassword = $("#password").val();
     console.log("User " + userName + " password " + userPassword);
 
-    // POST data to /api/newuser
+    // POST data to /api/login
     const postObject = {
       name: userName,
       password: userPassword
     };
     $.ajax({
-      url: `/api/newUser`,
+      url: `/api/login`,
       method: "POST",
       data: JSON.stringify(postObject),
       contentType: "application/json; charset=utf-8",
@@ -23,14 +23,14 @@ $(document).ready(function() {
         console.log(textStatus);
         if (textStatus === "success") {
           if (body.length !== 0) {
-            console.log("Posted successfully");
+            console.log("Logged in successfully");
             // save user id and name
             // user id is returned by the server
-            console.log(body);
+            // console.log(body);
             sessionStorage.setItem("userId", body.id);
             sessionStorage.setItem("userName", userName);
           } else {
-            console.log("No results returned (no facility booked)");
+            console.log("failed to log in");
           }
         } else {
           console.log(
