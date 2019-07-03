@@ -42,6 +42,9 @@ $(document).ready(function() {
       console.log(
         "Must select both user and facility, and start time not before end time"
       );
+      console.log(startTime);
+      console.log(endTime);
+      console.log("User id " + userId + " Facility id " + facilityId);
     } else {
       // POST data to server
       const postObject = {

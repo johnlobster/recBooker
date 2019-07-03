@@ -129,6 +129,32 @@ module.exports = function(app) {
       }
     });
   });
+
+  // POST route to create a new booking
+  app.post("/api/newBooking", function(req, res) {
+    console.log(req.body);
+    // add check for existing booking between start and end dates
+    // add check for logged in user before creating new booking
+    db.Booking.findOne({
+      where: {
+        userId: req.body.userId
+      }
+    }).then(function() {
+      db.User.create(req.body).then(function(dbNewUser) {
+        console.log("dbNewUser: " + dbNewUser);
+        if (app.locals.USE_SESSION_COOKIES) {
+          // will create a new session even if there was one previously
+          // (someone else logged in from that browser for instance)
+          req.session.userName = req.body.name;
+          req.session.userId = dbNewUser.id;
+        }
+        // don't want to send complete record as that includes password
+        res.json({ id: dbNewUser.id, name: dbNewUser.name });
+        console.log(`Creating User: ${JSON.stringify(dbNewUser)}`);
+      });
+    });
+  });
+
   // POST route for the login screen. Checks to see if the user exists and if not heads to the registration page
   app.post("/api/login", function(req, res) {
     console.log(req.body);
