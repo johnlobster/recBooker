@@ -68,8 +68,8 @@ module.exports = function(app) {
     db.Booking.findAll({
       where: {
         user: req.params.user,
-        startTime: { $between: [firstDate, secondDate] },
-        endTime: { $between: [firstDate, secondDate] }
+        startTime: { [Op.between]: [firstDate, secondDate] },
+        endTime: { [Op.between]: [firstDate, secondDate] }
       }
     })
       .then(function(dbBookDate) {
@@ -109,10 +109,43 @@ module.exports = function(app) {
     });
   });
 
-  // POST route for saving a new facility
+  // POST route for saving a new Facility
   app.post("/api/newFacility", function(req, res) {
-    db.Post.create(req.body).then(function(dbNewFacility) {
-      res.json(dbNewFacility);
+    console.log(req.body);
+    db.Facility.findOne({
+      where: {
+        name: req.body.name
+      }
+    }).then(function(result) {
+      if (result === null) {
+        db.Facility.create(req.body).then(function(dbNewFacility) {
+          console.log("dbNewFacility: " + dbNewFacility);
+          res.json(dbNewFacility);
+          console.log(`Creating Facility: ${JSON.stringify(dbNewFacility)}`);
+        });
+      } else {
+        console.log("That facility already exists in the DB");
+        res.json(result);
+      }
+    });
+  });
+  // POST route for the login screen. Checks to see if the user exists and if not heads to the registration page
+  app.post("/api/login", function(req, res) {
+    console.log(req.body);
+    db.User.findOne({
+      where: {
+        name: req.body.name
+      }
+    }).then(function(result) {
+      if (result === null) {
+        console.log(`Login Name: ${JSON.stringify(result)}`);
+        res.json(result);
+      } else {
+        console.log(
+          `Login Name: ${JSON.stringify(result)} already exists in the DB`
+        );
+        res.json(result);
+      }
     });
   });
 
@@ -141,4 +174,3 @@ module.exports = function(app) {
     }
   });
 };
-// this is a comment for eslint duh
