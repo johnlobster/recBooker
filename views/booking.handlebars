@@ -1,0 +1,53 @@
+<main>
+ <div class="container">
+     <!-- form -->
+     <div class="row">
+         <div class="col9 col6-md">
+            <form>
+                <!-- facility selection -->
+                <button type="button" id="facilityMenu" class="btn-lg btn-primary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Choose facility
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                  {{#each facilityNames}}
+                  <a class="dropdown-item facilityDropdown" href="#" data-value="{{id}}" data-name="{{name}}">{{name}}</a>
+                  {{/each}}
+
+                </div>
+                
+                <!-- start and end dates --> 
+                <div class="form-group">
+                    <label for="startDateInput">Start date for search</label>
+                    <input type="date" id="startDateInput" class="form-control" placeholder="Start time">
+                    <label for="endDateInput">End date for search</label>
+                    <input type="date" id="endDateInput" class="form-control" placeholder="End time">
+                </div>
+                <button id="submitButton" type="submit" class="btn btn-primary">Search</button>
+            </form>
+
+         </div>
+     </div>
+
+    <!-- Table to display bookings -->
+    <div class="row">
+        <div class="col12 col8-md">
+            <table class="table  border border-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">Start time</th>
+                        <th scope="col">End time</th>
+                        <th scope="col">User</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>            
+        </div>
+    </div>
+
+ </div>
+
+<script src="js/booking.js"></script>
+
+</main>
