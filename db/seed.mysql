@@ -15,7 +15,7 @@ VALUES
 ("Soccer field #1", NOW(), NOW()),
 ("Baseball field #1", NOW(), NOW());
 
-INSERT INTO users (name, password, createdAt, updatedAt)
+INSERT INTO Users (name, password, createdAt, updatedAt)
 VALUES 
 ("Mickey mouse", "abc", NOW(), NOW()),
 ("Minnie mouse", "def", NOW(), NOW());
