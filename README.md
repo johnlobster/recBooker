@@ -25,10 +25,20 @@ recBooker is a app and website that helps eliminate the common problem associate
 ### Technologies:
 * Javascript
 * Express
-* Passport Security (New Technology)<br />
 * Sequelize
 * Handlebar
 * Bootstrap
+* cookie-session (new technology, allows login sessions to be created)
+
+### New technology - sessions
+
+This uses
+* `cookie-parser`
+* `cookie-session`
+
+A detailed explanation can be found at [Sessions](./docs/Session.md)
+
+### Heroku deployment
 
 
 ### Git hub repository
@@ -79,6 +89,8 @@ or
 
 ### Continuous integration and linting
 
+[detailed setup guide](./docs/TravisHeroku.md)
+
 ##### eslint
 
 * `.eslintrc.json` modified to support es6 syntax
@@ -99,7 +111,7 @@ It runs the
 ```
 command. This runs eslint on all `.js` files in the directory (other than those in `.eslintignore` ) and in parallel runs all the mocha tests in the `test` directory.
 
-You can check for compliance before making pull request by running
+You should check for compliance before making pull request by running
 ```
 npm test
 ```

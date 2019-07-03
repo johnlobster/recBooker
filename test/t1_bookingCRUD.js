@@ -30,11 +30,12 @@ describe("t1_bookingCRUD: restart server\n", () => {
 describe("CRUD on bookings table using api routes", () => {
     it("Create new booking" + notWritten, (done) => {
         done();
+        // don't test yet because route not complete
         // chai.request(app)
         //     .post(`/api/newBooking`)
         //     .type('form')
         //     .send({
-        //         '_method': 'put',
+        //         '_method': 'post',
         //         'password': '123',
         //         'confirmPassword': '123'})
         //     .end((err, res) => {

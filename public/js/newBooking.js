@@ -34,8 +34,14 @@ $(document).ready(function() {
     startTime = moment.utc(eventDate + "T" + startTime).format();
     endTime = moment.utc(eventDate + "T" + endTime).format();
 
-    if (facilityId === 0 || userId === 0) {
-      console.log("Must select both user and facility ");
+    if (
+      facilityId === 0 ||
+      userId === 0 ||
+      moment.utc(endTime).isBefore(startTime)
+    ) {
+      console.log(
+        "Must select both user and facility, and start time not before end time"
+      );
     } else {
       // POST data to server
       const postObject = {

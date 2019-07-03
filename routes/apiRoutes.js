@@ -47,7 +47,12 @@ module.exports = function(app) {
         startTime: { [Op.between]: [firstDate, secondDate] },
         endTime: { [Op.between]: [firstDate, secondDate] }
       },
-      include: [db.User],
+      include: [
+        {
+          model: db.User,
+          attributes: ["name", "id"]
+        }
+      ],
       order: [["startTime", "ASC"]]
     })
       .then(function(dbBookDate) {
@@ -77,6 +82,7 @@ module.exports = function(app) {
 
   // POST route for saving a new user
   app.post("/api/newUser", function(req, res) {
+    console.log("New user");
     console.log(req.body);
     db.User.findOne({
       where: {
@@ -86,7 +92,14 @@ module.exports = function(app) {
       if (result === null) {
         db.User.create(req.body).then(function(dbNewUser) {
           console.log("dbNewUser: " + dbNewUser);
-          res.json(dbNewUser);
+          if (app.locals.USE_SESSION_COOKIES) {
+            // will create a new session even if there was one previously
+            // (someone else logged in from that browser for instance)
+            req.session.userName = req.body.name;
+            req.session.userId = dbNewUser.id;
+          }
+          // don't want to send complete record as that includes password
+          res.json({ id: dbNewUser.id, name: dbNewUser.name });
           console.log(`Creating User: ${JSON.stringify(dbNewUser)}`);
         });
       } else {
@@ -96,11 +109,36 @@ module.exports = function(app) {
     });
   });
 
-  // POST route for saving a new user
+  // POST route for saving a new facility
   app.post("/api/newFacility", function(req, res) {
     db.Post.create(req.body).then(function(dbNewFacility) {
       res.json(dbNewFacility);
     });
+  });
+
+  // POST route to logout - deletes session
+  app.post("/api/logout", (req, res) => {
+    if (app.locals.USE_SESSION_COOKIES) {
+      if (req.session) {
+        // user id is sent in body, don't log out unless matches user id in session
+        if (parseInt(req.session.userId) === parseInt(req.body.userId)) {
+          req.session = null;
+          res.json({ result: "Logout successful" });
+          console.log("Logged out successfully");
+        } else {
+          console.log(
+            "Logout unsuccessful (user id did not match session user id)"
+          );
+          res.json();
+        }
+      } else {
+        console.log("Logout unsuccessful (no session");
+        res.json();
+      }
+    } else {
+      res.json({ result: "Logout successful" });
+      console.log("Logged out successfully");
+    }
   });
 };
 // this is a comment for eslint duh
