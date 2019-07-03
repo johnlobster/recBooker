@@ -50,7 +50,7 @@ module.exports = function(app) {
       include: [
         {
           model: db.User,
-          attributes: ["name", "id"]
+          attributes: ["name", "id", "drivingLicence"]
         }
       ],
       order: [["startTime", "ASC"]]

@@ -43,7 +43,8 @@ $(document).ready(function() {
               let tRow,
                 sDate,
                 eDate,
-                usr = "";
+                usr,
+                dl = "";
               for (let i = 0; i < body.length; i++) {
                 tRow = $("<tr>");
                 sDate = $("<td>").text(
@@ -53,7 +54,9 @@ $(document).ready(function() {
                   moment(body[i].endTime).format("MMM Do HH:mm")
                 );
                 usr = $("<td>").text(body[i].User.name);
-                tRow.append(sDate, eDate, usr);
+                dl = $("<td>").text(body[i].User.drivingLicence);
+
+                tRow.append(sDate, eDate, usr, dl);
                 $("#tableBody").append(tRow);
               }
             } else {
