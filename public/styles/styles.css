@@ -9,7 +9,7 @@ $medium-screen: 992px !default;
 $large-screen: 1200px !default; 
 */
 
-
+/* styles for login.handlebars */
 .bigboicontainer {
     position: relative;
     top: 100px;
@@ -49,6 +49,23 @@ $large-screen: 1200px !default;
 @media only screen and (min-width: 1200px) {
     .bigboicontainer {
         width: 33%;
+    }
+}
+
+#loginMenuBox {
+    position: static; 
+    width: 30%;
+    margin-left: auto;
+    margin-right: 0;
+    background-color: transparent;
+}
+@media only screen and (min-width: 400px) {
+    #loginMenuBox {
+        top: 135px;
+        right: 0;
+        width: 20%;
+        position: absolute;
+        margin-top: 20rem;
     }
 }
 
@@ -96,4 +113,29 @@ label {
     width: 80%;
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
+}
+
+/* styles for index.handlebars */
+#facilityBox {
+    background-color: transparent;
+    padding-bottom: 0.3rem;
+    height: auto;
+}
+#facilityTitle {
+    background-color:rgba(173, 216, 230, 0.541);
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.8rem;
+    color: black;
+    margin-bottom: 0;
+
+}
+.facilityName {
+    background-color: rgba(173, 216, 230, 0.541);
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    padding-left: 0.8rem;
+    color: black;
+    margin-top: 0;
+    margin-bottom: 0;
 }

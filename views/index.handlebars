@@ -1,11 +1,13 @@
 <main id="mainIndex">
   <div class="container-fluid">
     <div class="row justify-content-between">
-      <div id="facilityBox" class="col-12 col-md-6">
-        <h3>Our facilities</h3>
-        {{#each facilityNames}}
-           <p>{{ name}}</p>
-        {{/each}}
+      <div class="col-12 col-8-sm col-md-6 col-lg-4">
+        <div id="facilityBox" >
+          <h3 id="facilityTitle">Our facilities</h3>
+          {{#each facilityNames}}
+            <p class="facilityName">{{ name}}</p>
+          {{/each}}
+        </div>
       </div>
       <div id="indexMenuBox" class="col-3">
         {{> navButtons }}
