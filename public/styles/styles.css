@@ -1,4 +1,90 @@
 
-main {
-    background-color: bisque;
+/* 
+  // Media Query Ranges for bootstrap (from a sass file)
+$small-screen-up: 601px !default;
+$medium-screen-up: 993px !default;
+$large-screen-up: 1201px !default;
+$small-screen: 600px !default;
+$medium-screen: 992px !default;
+$large-screen: 1200px !default; 
+*/
+
+
+.bigboicontainer {
+    position: relative;
+    top: 100px;
+    width: 33%;
+    margin: auto;
+    /* outline: solid;  */
+    /* outline-color: blue; */
+    border-radius: 5px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    padding-top:1rem;
+    background-color: aliceblue;
+}
+/* .bigboicontainer width 33% needs to change when screen size changes - using these media queries
+   makes it responsive to some extent. Didn't like the bootstrap sizes so changed them */
+@media only screen and (min-width: 0px) {
+    .bigboicontainer {
+        width: 80%;
+    }
+}
+@media only screen and (min-width: 400px) {
+    .bigboicontainer {
+        width: 70%;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .bigboicontainer {
+        width: 60%;
+    }
+}
+@media only screen and (min-width: 900px) {
+    .bigboicontainer {
+        width: 40%;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .bigboicontainer {
+        width: 33%;
+    }
+}
+
+.loginHeader {
+    position: relative;
+    bottom: 10px;
+    text-align: center;
+
+}
+
+#mainLogin {
+    background: url("../images/twin-pinesprojects_login_page_background.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+    -o-background-size: cover;
+    min-height: 90vh; /* Forces the background to occupy the full height of page */
+}
+
+label {
+    color: black;
+    font: bolder;
+}
+
+/* styles for main.handlebars */
+
+#headerBox {
+    background-color: darkblue;
+    color: white;
+    font-family: 'Bitter', serif;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+
+    padding-top: 0.65em;
+    padding-bottom: 0.65em;
+    padding-left: 2em;
+    margin-bottom: 0;
+
 }

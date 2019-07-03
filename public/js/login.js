@@ -22,15 +22,16 @@ $(document).ready(function() {
         console.log(typeof testStatus);
         console.log(textStatus);
         if (textStatus === "success") {
-          if (body.length !== 0) {
+          if (!body.length) {
+            // no body return, so failed login
+            console.log("failed to log in");
+          } else {
             console.log("Logged in successfully");
             // save user id and name
             // user id is returned by the server
             // console.log(body);
             sessionStorage.setItem("userId", body.id);
             sessionStorage.setItem("userName", userName);
-          } else {
-            console.log("failed to log in");
           }
         } else {
           console.log(
