@@ -9,6 +9,10 @@ $medium-screen: 992px !default;
 $large-screen: 1200px !default; 
 */
 
+body {
+    background-color: gray;
+}
+
 /* styles for login.handlebars */
 .bigboicontainer {
     position: relative;
@@ -54,18 +58,21 @@ $large-screen: 1200px !default;
 
 #loginMenuBox {
     position: static; 
-    width: 30%;
+    width: 60%;
     margin-left: auto;
-    margin-right: 0;
+    margin-right: auto;
     background-color: transparent;
 }
 @media only screen and (min-width: 400px) {
     #loginMenuBox {
+        position: absolute;
         top: 135px;
         right: 0;
-        width: 20%;
+        width: 18%;
         position: absolute;
-        margin-top: 20rem;
+        margin-top: 0rem;
+        margin-right: 0;
+
     }
 }
 
@@ -122,7 +129,7 @@ label {
     height: auto;
 }
 #facilityTitle {
-    background-color:rgba(173, 216, 230, 0.541);
+    background-color:rgba(173, 216, 230, 0.541); /*partially transparent */
     padding-top: 0.2rem;
     padding-bottom: 0.2rem;
     padding-left: 0.8rem;
@@ -131,7 +138,7 @@ label {
 
 }
 .facilityName {
-    background-color: rgba(173, 216, 230, 0.541);
+    background-color: rgba(173, 216, 230, 0.541); /*partially transparent */
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
     padding-left: 0.8rem;
