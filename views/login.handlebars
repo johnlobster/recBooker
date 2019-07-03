@@ -1,25 +1,19 @@
 <main>
-    <div class="container">
-        <!-- form -->
-        <div class="row">
-            <div class="col9 col6-md">
-                <form>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control" >
-                        <label for="endDateInput">Password</label>
-                        <input type="password" id="password" class="form-control" >
-                    </div>
-                    <button id="submitButton" type="submit" class="btn btn-primary">Send</button>
-                </form>
 
-            </div>
+<link href="./styles/main.css" rel="stylesheet">
+
+<div class ="bigboicontainer">
+        <h1 class="loginHeader">Login</h1>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Your Name Here.">
         </div>
-        <div class="row">
-            <div class="col9 col6-md">
-                <button id="logoutButton" type="submit" class="btn btn-primary">Logout</button>
-            </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password">
         </div>
+        <button type="submit" class="btn btn-primary" id="submitButton">Sign in</button>
     </div>
+
     <script src="js/login.js"></script>
 </main>

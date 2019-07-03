@@ -1,0 +1,42 @@
+.bigboicontainer {
+    position: relative;
+    top: 100px;
+    width: 33%;
+    margin: auto;
+    /* outline: solid;  */
+    /* outline-color: blue; */
+    border-radius: 5px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    padding-top:1rem;
+    background-color: aliceblue;
+}
+
+.loginHeader {
+    position: relative;
+    bottom: 10px;
+    text-align: center;
+
+}
+
+main {
+    background: url("../images/twin-pinesprojects_login_page_background.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+}
+
+body {
+    background: url("../images/twin-pinesprojects_login_page_background.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+}
+
+label {
+    color: black;
+    font: bolder;
+}
