@@ -5,7 +5,6 @@ const moment = require("moment");
 
 const express = require("express");
 const exphbs = require("express-handlebars");
-const Handlebars = require("handlebars");
 const hbsPartialFile = require("handlebars-partial-file")({
   referenceDir: "./views/partials/"
 }); // read partials from a file

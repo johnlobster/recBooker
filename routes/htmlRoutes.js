@@ -28,13 +28,13 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/userBooking", function(req, res) {
+  app.get("/userBookings", function(req, res) {
     // page makes an api request to populate the table
-    // pass list of facilities so user can choose
-    db.Facility.findAll({
-      attributes: ["name", "id"]
-    }).then(function(facilityNames) {
-      res.render("userBooking", { facilityNames });
+    // reads all user names - should really get the name from session
+    db.User.findAll({
+      attributes: ["name", "id"] // don't return the password ...
+    }).then(function(userNames) {
+      res.render("userBookings", { userNames: userNames });
     });
   });
 
@@ -48,9 +48,6 @@ module.exports = function(app) {
       db.User.findAll({
         attributes: ["name", "id"]
       }).then(function(userNames) {
-        console.log("Route /newBooking");
-        console.log("userNames");
-        console.log(userNames);
         res.render("newBooking", {
           facilityNames: facilityNames,
           userNames: userNames

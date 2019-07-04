@@ -5,16 +5,17 @@
     </div>
     
     <div class="bigboicontainer">
-        <h1 class="loginHeader">See facility bookings</h1>
+        <h1 class="loginHeader">See your bookings</h1>
         <form>
-            <!-- facility selection -->
-            <button type="button" id="facilityMenu" class="btn-lg btn-primary dropdown-toggle" data-toggle="dropdown"
+            <!-- user selection -->
+            <button type="button" id="userMenu" class="btn-lg btn-primary dropdown-toggle" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                Choose facility
+                Choose user
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
-                {{#each facilityNames}}
-                <a class="dropdown-item facilityDropdown" href="#" data-value="{{id}}" data-name="{{name}}">{{name}}</a>
+                {{#each userNames}}
+                <a class="dropdown-item userDropdown" href="#" data-value="{{id}}" data-name="{{name}}">
+                    {{name}}</a>
                 {{/each}}
         
             </div>
@@ -33,14 +34,13 @@
 
     <!-- Table to display bookings -->
     <div class="bigboicontainer resultsTable">
-        <h3>Bookings for <span id="facName" class="pl-1 pr-1"></span></h3>
+        <h3>Your bookings</h3>
             <table class="table  border border-primary">
                 <thead>
                     <tr>
+                        <th scope="col">Facility</th>
                         <th scope="col">Start time</th>
                         <th scope="col">End time</th>
-                        <th scope="col">User</th>
-                        <th scope="col">User driving license</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -50,6 +50,6 @@
 
  </div>
 
-<script src="js/booking.js"></script>
+<script src="js/userBookings.js"></script>
 
 </main>

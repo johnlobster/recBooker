@@ -3,13 +3,13 @@
     <div class="row justify-content-between">
       <div class="col-12 col-8-sm col-md-6 col-lg-4">
         <div id="facilityBox" >
-          <h3 id="facilityTitle">Our facilities</h3>
+          <h2 id="facilityTitle">Our facilities</h2>
           {{#each facilityNames}}
-            <p class="facilityName">{{ name}}</p>
+            <h5 class="facilityName">{{ name}}</h5>
           {{/each}}
         </div>
       </div>
-      <div id="indexMenuBox" class="col-5 col-md-3">
+      <div class="menuBox" class="col-5 col-md-3">
         {{> navButtons }} 
       </div>
     </div>

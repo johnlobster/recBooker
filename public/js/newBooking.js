@@ -48,11 +48,12 @@ $(document).ready(function() {
     } else {
       // POST data to server
       const postObject = {
-        userId: userId,
-        facilityId: facilityId,
+        UserId: userId,
+        FacilityId: facilityId,
         startTime: startTime,
         endTime: endTime
       };
+      console.log(postObject);
       $.ajax({
         url: `/api/newBooking`,
         method: "POST",
@@ -80,4 +81,4 @@ $(document).ready(function() {
         });
     }
   });
-});
+}); // end document ready

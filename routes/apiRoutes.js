@@ -65,12 +65,21 @@ module.exports = function(app) {
 
   // Returns all bookings between a start and end date for a specific user (renter)
   app.get("/api/user_bookings/:user/:startDate/:endDate", function(req, res) {
+    let firstDate = moment.utc(req.params.startDate).format();
+    let secondDate = moment.utc(req.params.endDate).format();
+
     db.Booking.findAll({
       where: {
-        user: req.params.user,
+        userId: req.params.user,
         startTime: { [Op.between]: [firstDate, secondDate] },
         endTime: { [Op.between]: [firstDate, secondDate] }
-      }
+      },
+      include: [
+        {
+          model: db.Facility,
+          attributes: ["name", "id"]
+        }
+      ]
     })
       .then(function(dbBookDate) {
         res.json(dbBookDate);
@@ -132,26 +141,17 @@ module.exports = function(app) {
 
   // POST route to create a new booking
   app.post("/api/newBooking", function(req, res) {
-    console.log(req.body);
     // add check for existing booking between start and end dates
     // add check for logged in user before creating new booking
-    db.Booking.findOne({
-      where: {
-        userId: req.body.userId
-      }
-    }).then(function() {
-      db.User.create(req.body).then(function(dbNewUser) {
-        console.log("dbNewUser: " + dbNewUser);
-        if (app.locals.USE_SESSION_COOKIES) {
-          // will create a new session even if there was one previously
-          // (someone else logged in from that browser for instance)
-          req.session.userName = req.body.name;
-          req.session.userId = dbNewUser.id;
-        }
-        // don't want to send complete record as that includes password
-        res.json({ id: dbNewUser.id, name: dbNewUser.name });
-        console.log(`Creating User: ${JSON.stringify(dbNewUser)}`);
-      });
+    // db.Booking.findOne({
+    //   where: {
+    //     id: req.body.userId
+    //   }
+    console.log("/api/newBooking");
+    console.log(req.body);
+    db.Booking.create(req.body).then(function(dbNewBooking) {
+      res.json(dbNewBooking);
+      console.log(`Creating new booking id ${dbNewBooking.id}`);
     });
   });
 

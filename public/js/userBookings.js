@@ -2,16 +2,15 @@
 // John Webster
 
 $(document).ready(function() {
-  var facilityId = 0;
-  var facilityName = "";
+  var userId = 0;
+  var userName = "";
 
-  // select the facility
-  $(".facilityDropdown").on("click", function() {
-    facilityId = $(this).attr("data-value");
-    facilityName = $(this).attr("data-name");
-    // menu header now becomes facility name
-    $("#facilityMenu").text(facilityName);
-    $("#facName").text(facilityName);
+  // select a user
+  $(".userDropdown").on("click", function() {
+    userId = $(this).attr("data-value");
+    userName = $(this).attr("data-name");
+    // menu header now becomes user name
+    $("#userMenu").text(userName);
   });
 
   // process form and GET from server api
@@ -25,15 +24,15 @@ $(document).ready(function() {
     // Used for testing
     // startDate = moment.utc().subtract(10, "days").format();
     // endDate = moment.utc().add(10, "days").format();
-    if (facilityId === 0) {
-      console.log("Need to choose facility");
+    if (userId === 0) {
+      console.log("Need to choose a user");
     } else {
       if (moment.utc(endDate).isBefore(startDate)) {
         console.log("End date is before start date");
       } else {
         // GET data from server
         $.ajax({
-          url: `/api/facility_bookings/${facilityId}/${startDate}/${endDate}`,
+          url: `/api/user_bookings/${userId}/${startDate}/${endDate}`,
           method: "GET"
         }).then(function(body, textStatus, xhdr) {
           if (textStatus === "success") {
@@ -44,26 +43,24 @@ $(document).ready(function() {
               let tRow,
                 sDate,
                 eDate,
-                usr,
-                dl = "";
+                facility = "";
               for (let i = 0; i < body.length; i++) {
                 tRow = $("<tr>");
                 sDate = $("<td>").text(
-                  moment(body[i].startTime).format("MMM Do HH:mm A")
+                  moment.utc(body[i].startTime).format("MMM Do HH:mm A")
                 );
                 eDate = $("<td>").text(
-                  moment(body[i].endTime).format("MMM Do HH:mm A")
+                  moment.utc(body[i].endTime).format("MMM Do HH:mm A")
                 );
-                usr = $("<td>").text(body[i].User.name);
-                dl = $("<td>").text(body[i].User.drivingLicence);
+                facility = $("<td>").text(body[i].Facility.name);
 
-                tRow.append(sDate, eDate, usr, dl);
+                tRow.append(sDate, eDate, facility);
                 $("#tableBody").append(tRow);
               }
               // scroll down so table is visible
               window.scrollBy(0, 300);
             } else {
-              console.log("No results returned (no facilities booked)");
+              console.log(`${userName} has no facilities booked`);
             }
           } else {
             console.log(

@@ -1,4 +1,5 @@
 // javascript for front page
 $(document).ready(function() {
-  console.log("Loaded index.js");
+  // could add code to display user name in banner
+  // would be needed everywhere so probably better in a separate script
 }); // end document ready

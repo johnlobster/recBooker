@@ -4,11 +4,13 @@ $(document).ready(function() {
     event.preventDefault(); // stop from posting and reloading page
     let userName = $("#name").val();
     let userPassword = $("#password").val();
+    let userDrivingLicense = $("#drivingLicense").val();
     console.log("User " + userName + " password " + userPassword);
 
-    // POST data to /api/newuser
+    // POST data to /api/newUser
     const postObject = {
       name: userName,
+      drivingLicence: userDrivingLicense,
       password: userPassword
     };
     $.ajax({
@@ -41,41 +43,5 @@ $(document).ready(function() {
       .fail((xhr) => {
         console.log("AJAX POST failed with error code " + xhr.status);
       });
-  });
-
-  $("#logoutButton").on("click", function(event) {
-    event.preventDefault(); // stop from posting and reloading page
-    // if not logged in, can't log out
-    if (!sessionStorage.getItem("userId")) {
-      // no user name available, can't log out
-      console.log("Not logged in, can't log out");
-    } else {
-      // sending user id to server so it can check against session user id
-      $.ajax({
-        url: `/api/logout`,
-        method: "POST",
-        data: JSON.stringify({ userId: sessionStorage.getItem("userId") }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json"
-      })
-        .done(function(body, textStatus, xhdr) {
-          if (textStatus === "success") {
-            if (body.length !== 0) {
-              console.log("Logged out successfully");
-              sessionStorage.removeItem("userId");
-              sessionStorage.removeItem("userName");
-            } else {
-              console.log("empty body returned - logout not successful");
-            }
-          } else {
-            console.log(
-              "Error returned from server http status " + String(xhdr.status)
-            );
-          }
-        })
-        .fail((xhr) => {
-          console.log("AJAX POST failed with error code " + xhr.status);
-        });
-    }
   });
 }); // close document ready
