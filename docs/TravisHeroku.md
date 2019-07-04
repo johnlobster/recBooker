@@ -84,6 +84,11 @@ Because master on github is locked, cannot make changes to master and check whet
 ```
 heroku create --remote staging
 ```
+If something crashes and your git loses the remote connection (or someone else created the heroku setup), you can use `git remote add <name> <url>` to add it as a remote. The heroku git url is in the settings of the heroku setup. For instance
+```
+ git remote add staging https://git.heroku.com/remembrance-backbacon-77087.git
+ ```
+
 If you have more than one heroku remote then you have to specify which one you want by adding `-r` or `--remote` to commands. You can set up default with
 ```
 git config heroku.remote staging
