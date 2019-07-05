@@ -100,7 +100,7 @@ module.exports = function(app) {
     }).then(function(result) {
       if (result === null) {
         db.User.create(req.body).then(function(dbNewUser) {
-          console.log("dbNewUser: " + dbNewUser);
+          // console.log("dbNewUser: " + dbNewUser);
           if (app.locals.USE_SESSION_COOKIES) {
             // will create a new session even if there was one previously
             // (someone else logged in from that browser for instance)
@@ -108,12 +108,12 @@ module.exports = function(app) {
             req.session.userId = dbNewUser.id;
           }
           // don't want to send complete record as that includes password
-          res.json({ id: dbNewUser.id, name: dbNewUser.name });
+          res.json({ success: true, id: dbNewUser.id, name: dbNewUser.name });
           console.log(`Creating User: ${JSON.stringify(dbNewUser)}`);
         });
       } else {
         console.log("that name already exists in the DB");
-        res.json(result);
+        res.json({ success: false, id: result.id, name: result.name });
       }
     });
   });
@@ -161,13 +161,20 @@ module.exports = function(app) {
     db.User.findOne({
       where: {
         name: req.body.name
-      }
+      },
+      attributes: ["name", "id"]
     }).then(function(result) {
+      // console.log("Returned ");
+      // console.log(result);
       if (result === null) {
         console.log(`Login failed for user ${req.body.name}`);
         res.json(result);
       } else {
         console.log(`Logged in user ${req.body.name}`);
+        if (app.locals.USE_SESSION_COOKIES) {
+          req.session.userName = result.name;
+          req.session.userId = result.id;
+        }
         res.json(result);
       }
     });

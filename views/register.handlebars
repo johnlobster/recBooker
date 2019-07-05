@@ -11,12 +11,45 @@
                 <label for="name">Name</label>
                 <input type="text" id="name" class="form-control">
                 <label for="drivingLicense">Driving license</label>
-                <input type="text" id="drivingLicence" class="form-control">
+                <input type="text" id="drivingLicense" class="form-control">
                 <label for="password">Password</label>
                 <input type="password" id="password" class="form-control">
             </div>
             <button id="submitButton" type="submit" class="btn btn-primary">Send</button>
         </form>
+    </div>
+
+    <!-- modal for register responses -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+    
+                <div class="modal-header">
+                    <h2>New user</h2>
+                    <button type="button" class="close" id="closeInstructions1"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+    
+                <div class="modal-body">
+                    <h4 id="registerModalText1"></h4>
+                    <h4 id="registerModalText2"></h4>
+    
+                </div>
+    
+                <div class="modal-footer">
+                    <a href="/">
+                        <button class="btn btn-primary" data-dismiss="modal">Home
+                            page</button>
+                    </a>
+                    <button type="button btn-sm" id="closeInstructions2"
+                        class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                </div>
+    
+            </div>
+        </div>
     </div>
                 
     
