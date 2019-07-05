@@ -4,10 +4,10 @@ App for making bookings of city recreational facilities, administrating faciliti
 
 ### Developers
 
-* Michael Sender
-* Filmon Habtu
-* Rob Ross
-* John Webster
+* Michael Sender - CSS / Bootstrap
+* Filmon Habtu - HTML / Handlebars
+* Rob Ross - API Routes / Presentation
+* John Webster - Models / Logic
 
 ### Who, What are they doing,
 ### Concept
@@ -37,6 +37,10 @@ This uses
 * `cookie-session`
 
 A detailed explanation can be found at [Sessions](./docs/Session.md)
+
+### Presentation - (A presentation on project can be found here)
+
+<https://prezi.com/p/mivd7w2qi4dm/recbooker/>
 
 ### Heroku deployment
 
