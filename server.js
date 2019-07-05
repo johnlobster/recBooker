@@ -4,7 +4,10 @@ const executeSQLFile = require("./test/functions/executeSQLFile.js");
 const moment = require("moment");
 
 const express = require("express");
-var exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");
+const hbsPartialFile = require("handlebars-partial-file")({
+  referenceDir: "./views/partials/"
+}); // read partials from a file
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 
@@ -56,14 +59,17 @@ if (
   app.use(function(req, res, next) {
     console.log("My custom middleware");
     console.log(req.session);
-    console.log(req.cookies);
-    console.log(req.signedCookies);
-    console.log(req.secret + "\n");
+    // console.log(req.cookies);
+    // console.log(req.signedCookies);
+    // console.log(req.secret + "\n");
     next();
   });
 }
 // static route needs to be the last middleware included
 app.use(express.static("public"));
+
+// register handlebars partials, uses module handlebars-partial-file
+hbsPartialFile.registerFile("navButtons.handlebars", ["navButtons"]);
 
 // Handlebars
 app.engine(
@@ -74,7 +80,7 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-// Routes (order is important as last html route returns 404)
+// Express routes (order is important as last html route returns 404)
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
@@ -100,6 +106,7 @@ if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
   syncOptions.logging = yellowLog;
 }
 
+// testing variables before synching database
 // console.log("Running server.js\nsyncOptions");
 // console.log(syncOptions);
 // console.log("NODE_ENV " + process.env.NODE_ENV);

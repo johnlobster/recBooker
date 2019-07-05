@@ -50,7 +50,7 @@ module.exports = function(app) {
       include: [
         {
           model: db.User,
-          attributes: ["name", "id"]
+          attributes: ["name", "id", "drivingLicence"]
         }
       ],
       order: [["startTime", "ASC"]]
@@ -65,12 +65,21 @@ module.exports = function(app) {
 
   // Returns all bookings between a start and end date for a specific user (renter)
   app.get("/api/user_bookings/:user/:startDate/:endDate", function(req, res) {
+    let firstDate = moment.utc(req.params.startDate).format();
+    let secondDate = moment.utc(req.params.endDate).format();
+
     db.Booking.findAll({
       where: {
-        user: req.params.user,
+        userId: req.params.user,
         startTime: { [Op.between]: [firstDate, secondDate] },
         endTime: { [Op.between]: [firstDate, secondDate] }
-      }
+      },
+      include: [
+        {
+          model: db.Facility,
+          attributes: ["name", "id"]
+        }
+      ]
     })
       .then(function(dbBookDate) {
         res.json(dbBookDate);
@@ -129,6 +138,23 @@ module.exports = function(app) {
       }
     });
   });
+
+  // POST route to create a new booking
+  app.post("/api/newBooking", function(req, res) {
+    // add check for existing booking between start and end dates
+    // add check for logged in user before creating new booking
+    // db.Booking.findOne({
+    //   where: {
+    //     id: req.body.userId
+    //   }
+    console.log("/api/newBooking");
+    console.log(req.body);
+    db.Booking.create(req.body).then(function(dbNewBooking) {
+      res.json(dbNewBooking);
+      console.log(`Creating new booking id ${dbNewBooking.id}`);
+    });
+  });
+
   // POST route for the login screen. Checks to see if the user exists and if not heads to the registration page
   app.post("/api/login", function(req, res) {
     console.log(req.body);
@@ -138,12 +164,10 @@ module.exports = function(app) {
       }
     }).then(function(result) {
       if (result === null) {
-        console.log(`Login Name: ${JSON.stringify(result)}`);
+        console.log(`Login failed for user ${req.body.name}`);
         res.json(result);
       } else {
-        console.log(
-          `Login Name: ${JSON.stringify(result)} already exists in the DB`
-        );
+        console.log(`Logged in user ${req.body.name}`);
         res.json(result);
       }
     });

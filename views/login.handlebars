@@ -1,8 +1,10 @@
-<main>
+<main id="mainLogin">
 
-<link href="./styles/main.css" rel="stylesheet">
-
-<div class ="bigboicontainer">
+    <div class="menuBox">
+        {{> navButtons }}
+    </div>
+    
+    <div class ="bigboicontainer">
         <h1 class="loginHeader">Login</h1>
         <div class="form-group">
           <label for="name">Name</label>
@@ -14,6 +16,12 @@
         </div>
         <button type="submit" class="btn btn-primary" id="submitButton">Sign in</button>
     </div>
+
+    
+
+    
+    
+    
 
     <script src="js/login.js"></script>
 </main>

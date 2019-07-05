@@ -15,10 +15,10 @@ VALUES
 ("Soccer field #1", NOW(), NOW()),
 ("Baseball field #1", NOW(), NOW());
 
-INSERT INTO Users (name, password, createdAt, updatedAt)
+INSERT INTO Users (name, drivingLicence, password, createdAt, updatedAt)
 VALUES 
-("Mickey mouse", "abc", NOW(), NOW()),
-("Minnie mouse", "def", NOW(), NOW());
+("Mickey mouse", "DL_bad_driver", "abc", NOW(), NOW()),
+("Minnie mouse", "DL_terrible_driver", "def", NOW(), NOW());
 
 INSERT INTO Bookings (startTime, endTime, UserId, FacilityId, createdAt, updatedAt)
 VALUES 
