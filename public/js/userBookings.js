@@ -54,7 +54,7 @@ $(document).ready(function() {
                 );
                 facility = $("<td>").text(body[i].Facility.name);
 
-                tRow.append(sDate, eDate, facility);
+                tRow.append(facility, sDate, eDate);
                 $("#tableBody").append(tRow);
               }
               // scroll down so table is visible
