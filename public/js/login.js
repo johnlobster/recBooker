@@ -25,8 +25,20 @@ $(document).ready(function() {
           if (!body) {
             // no body return, so failed login
             console.log("failed to log in");
+            // display modal
+            $("#loginModalText1").text("Login unsuccessful");
+            $("#loginModalText2").text("User " + userName + " couldn't log in");
+            $("#loginModal").modal({
+              show: true
+            });
           } else {
             console.log("Logged in successfully");
+            // display modal
+            $("#loginModalText1").text("Login successful");
+            $("#loginModalText2").text("User " + userName + " logged in");
+            $("#loginModal").modal({
+              show: true
+            });
             // save user id and name
             // user id is returned by the server
             // console.log(body);
