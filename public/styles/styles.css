@@ -106,11 +106,13 @@ label {
     color: white;
     font-family: 'Bitter', serif;
     font-weight: bold;
+    font-size: 35px;
     letter-spacing: 0.2rem;
 
-    padding-top: 0.65em;
+    padding-top: 0.8em;
     padding-bottom: 0.65em;
     padding-left: 2em;
+    padding-right:2em;
     margin-bottom: 0;
 
 }
@@ -133,6 +135,7 @@ label {
 #facilityBox {
     background-color: transparent;
     padding-bottom: 0.3rem;
+    margin-top: 2rem;
     height: auto;
 }
 #facilityTitle {
@@ -143,6 +146,11 @@ label {
     color: black;
     margin-bottom: 0;
 
+}
+
+#logoBox {
+    padding-top: 1rem;
+    padding-bottom: 1 rem;
 }
 .facilityName {
     background-color: rgba(173, 216, 230, 0.541); /*partially transparent */

@@ -12,13 +12,25 @@
 
 INSERT INTO Facilities (name, createdAt, updatedAt)
 VALUES 
-("Soccer field #1", NOW(), NOW()),
-("Baseball field #1", NOW(), NOW());
+("Johnson Soccer field #1", NOW(), NOW()),
+("Johnson Soccer field #2", NOW(), NOW()),
+("Kemp Field Large", NOW(), NOW()),
+("Livermore Gazebo", NOW(), NOW()),
+("Kemp Gazebo", NOW(), NOW()),
+("Economy Practice Field", NOW(), NOW());
+
 
 INSERT INTO Users (name, drivingLicence, password, createdAt, updatedAt)
 VALUES 
-("Mickey mouse", "DL_bad_driver", "abc", NOW(), NOW()),
-("Minnie mouse", "DL_terrible_driver", "def", NOW(), NOW());
+("John Smith", "c2175645", "abc", NOW(), NOW()),
+("Marnie Thompson", "a3076543", "def", NOW(), NOW()),
+("Bob Hershfield", "a3099765", "def", NOW(), NOW()),
+("Chuck Prestonson", "a8834232", "def", NOW(), NOW()),
+("Marty McFly", "C217632", "def", NOW(), NOW());
+
+
+
+
 
 INSERT INTO Bookings (startTime, endTime, UserId, FacilityId, createdAt, updatedAt)
 VALUES 
