@@ -157,7 +157,7 @@ module.exports = function(app) {
 
   // POST route for the login screen. Checks to see if the user exists and if not heads to the registration page
   app.post("/api/login", function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     db.User.findOne({
       where: {
         name: req.body.name

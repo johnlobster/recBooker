@@ -1,5 +1,5 @@
 "use strict";
-// template generated file that reads all mnodels in models subdirectory
+// template generated file that reads all models in models subdirectory
 // and adds them to the db
 
 require("dotenv").config(); // add variables in .env file to process.env

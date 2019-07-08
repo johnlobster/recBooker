@@ -26,7 +26,9 @@ app.locals.USE_SESSION_COOKIES = false; // using app local variables so can be p
 // add cookie session to flow, flags to disable it until ready (enabled in production, not so sure about that)
 // not enabled for test, will cause issues with some tests
 if (
-  process.env.DEV_ENABLE_SESSION_COOKIES &&
+  (process.env.DEV_ENABLE_SESSION_COOKIES &&
+    process.env.NODE_ENV === "development") ||
+  process.env.NODE_ENV === "test" ||
   process.env.NODE_ENV === "development"
 ) {
   // enable cookie sessions
