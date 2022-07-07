@@ -18,7 +18,7 @@
     "express": "^4.17.0",
     "express-handlebars": "^3.1.0",
     "handlebars-partial-file": "^1.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mysql2": "^1.6.5",
     "sequelize": "^5.8.6"
   },
